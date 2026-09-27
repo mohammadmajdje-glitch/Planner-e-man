@@ -1,0 +1,3425 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>پلنر من | نهم تجربی · نمونه دولتی</title>
+<link rel="manifest" href="manifest.json" id="appManifest">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232C3E8C'/><stop offset='1' stop-color='%235B3E99'/></linearGradient></defs><rect width='512' height='512' rx='96' fill='url(%23g)'/><text x='256' y='320' text-anchor='middle' font-family='sans-serif' font-size='240' font-weight='700' fill='%23E8C766'>پ</text></svg>" type="image/svg+xml">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232C3E8C'/><stop offset='1' stop-color='%235B3E99'/></linearGradient></defs><rect width='512' height='512' rx='96' fill='url(%23g)'/><text x='256' y='320' text-anchor='middle' font-family='sans-serif' font-size='240' font-weight='700' fill='%23E8C766'>پ</text></svg>">
+<meta name="theme-color" content="#151B3B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Reem+Kufi:wght@400;500;600;700&family=Lalezar&family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Royal European palette — deep navy, regal purple, gold leaf */
+  --royal-navy:#151A3D;
+  --royal-navy-2:#1F2557;
+  --royal-blue:#2C3E8C;
+  --royal-purple:#5B3E99;
+  --royal-purple-2:#7A56C4;
+  --royal-gold:#C9A227;
+  --royal-gold-2:#E8C766;
+  --iran-green:#151A3D;      /* kept as alias so old JS-referenced vars still resolve */
+  --iran-green-2:#1F2557;
+  --iran-red:#B0203F;
+  --iran-red-2:#8E1731;
+  --iran-gold:#C9A227;
+  --iran-gold-light:#E8C766;
+  --iran-turq:#2C7A7B;
+  --ivory:#F6F4FC;
+  --ivory-2:#ECE8F8;
+  --ink:#1A1B33;
+  --ink-soft:#6C6C8A;
+  --line:#E1DCF0;
+  --done:#1F8A5F;
+  --radius:18px;
+  --radius-sm:12px;
+  --radius-lg:26px;
+  --shadow-sm:0 2px 10px rgba(30,20,80,.06);
+  --shadow:0 10px 30px rgba(30,20,80,.10), 0 2px 8px rgba(30,20,80,.05);
+  --shadow-lg:0 18px 46px rgba(21,26,61,.16);
+  --font-display:'Lalezar','Vazirmatn',sans-serif;
+  --font-heading:'Reem Kufi','Vazirmatn',sans-serif;
+  --font-body:'Vazirmatn','Noto Sans Arabic',sans-serif;
+  --font-classic:'Vazirmatn',sans-serif;
+  --font-numeral:'Baloo Bhaijaan 2','Vazirmatn',sans-serif;
+  --paper:#FFFFFF;
+  --rule:#E1DCF0;
+}
+body[data-theme="dark"]{
+  --ivory:#12142B;
+  --ivory-2:#1B1E3D;
+  --ink:#ECE9FA;
+  --ink-soft:#9995BE;
+  --line:#33355E;
+  --iran-gold:#E8C766;
+  --iran-green:#ECE9FA;
+  --iran-green-2:#C9C4EE;
+  --paper:#1B1E3D;
+  --rule:#3A3D6B;
+  --royal-navy:#0C0E23;
+}
+body[data-theme="dark"]{
+  background-color:#0C0E23;
+  background-image:
+    radial-gradient(circle at 12% -10%, rgba(90,62,153,.28), transparent 42%),
+    radial-gradient(circle at 100% 0%, rgba(201,162,39,.16), transparent 38%),
+    linear-gradient(175deg,#0C0E23,#12142B 60%,#151A3D);
+}
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .missed-item,
+body[data-theme="dark"] .missed-day,
+body[data-theme="dark"] .rem-item,
+body[data-theme="dark"] .modal-card,
+body[data-theme="dark"] .book-pick .chip,
+body[data-theme="dark"] .hw-btns button,
+body[data-theme="dark"] .rem-time-row select,
+body[data-theme="dark"] .rem-msg-input,
+body[data-theme="dark"] .hw-note,
+body[data-theme="dark"] .note-box,
+body[data-theme="dark"] .day-tabs button,
+body[data-theme="dark"] .seg button,
+body[data-theme="dark"] .check-row,
+body[data-theme="dark"] .profile-card,
+body[data-theme="dark"] .book{
+  background:var(--ivory-2);color:var(--ink);border-color:var(--line);
+}
+body[data-theme="dark"] .book.done{background:#132A22;border-color:#1F8A5F;}
+body[data-theme="dark"] .missed-card{background:var(--ivory-2);border-color:var(--line);}
+body[data-theme="dark"] .missed-card h3{color:#E8A0A0;}
+body[data-theme="dark"] nav.bottom{background:var(--paper);border-color:var(--line);}
+body[data-theme="dark"] .clock-digital,body[data-theme="dark"] .cal-title,body[data-theme="dark"] .card h3,
+body[data-theme="dark"] .section-title,body[data-theme="dark"] .top-title,body[data-theme="dark"] .profile-name{color:var(--iran-gold-light,#E8C766);}
+body[data-theme="dark"] .cal-cell .day-num{color:var(--ink);}
+body[data-theme="dark"] .cal-cell.holiday .day-num{background:#3A1D28!important;color:#F0A0B4!important;}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:var(--font-body);
+  font-weight:400;
+  font-size:15.5px;
+  line-height:1.85;
+  background-color:var(--ivory);
+  background-image:
+    radial-gradient(circle at 15% -8%, rgba(91,62,153,.10), transparent 42%),
+    radial-gradient(circle at 100% 4%, rgba(201,162,39,.14), transparent 36%),
+    linear-gradient(175deg, #F8F6FD 0%, #F3F0FA 45%, #EDE9F8 100%);
+  background-attachment:fixed;
+  color:var(--ink);
+  min-height:100vh;
+  padding-bottom:92px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+main, header.top, .profile-card, .app-footer, nav.bottom{position:relative;z-index:1;}
+.brand{font-family:var(--font-display);font-weight:400;letter-spacing:.01em;}
+h1,h2,h3,.section-title,.top-title,.lock-title,.profile-name{
+  font-feature-settings:"ss01";
+  text-rendering:geometricPrecision;
+}
+
+/* header — royal masthead: deep navy → purple gradient, gold rule */
+header.top{
+  position:relative;
+  background:linear-gradient(120deg, var(--royal-navy) 0%, var(--royal-navy-2) 55%, var(--royal-purple) 130%);
+  color:#F3EFFF;
+  padding:20px 18px 22px;
+  border-radius:0 0 28px 28px;
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+}
+header.top svg.deco{display:none;}
+.top-row{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;}
+.top-title{font-family:var(--font-display);font-weight:400;font-size:30px;line-height:1.5;letter-spacing:.01em;color:var(--iran-gold-light);text-shadow:0 2px 10px rgba(0,0,0,.25);}
+.top-sub{font-size:12px;color:#C7C2EA;margin-top:4px;font-family:var(--font-body);}
+.top-btns{display:flex;gap:6px;}
+.icon-btn{background:rgba(255,255,255,.08);border:1px solid rgba(232,199,102,.35);color:#F3EFFF;
+  width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;transition:background .15s,transform .15s;backdrop-filter:blur(4px);}
+.icon-btn:active{background:rgba(232,199,102,.22);transform:scale(.94);}
+.icon-btn.spin{animation:spin .6s ease;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.date-chip{
+  margin-top:14px;position:relative;z-index:1;
+  background:rgba(255,255,255,.07);border:1px solid rgba(232,199,102,.28);
+  border-radius:var(--radius-sm);padding:12px 14px;display:flex;justify-content:space-between;align-items:center;
+  backdrop-filter:blur(6px);
+}
+.date-chip .jdate{font-size:15px;font-weight:700;font-family:var(--font-heading);color:#fff;}
+.date-chip .weekday{font-size:12px;color:#C7C2EA;margin-top:2px;}
+.holiday-pill{background:linear-gradient(120deg,var(--iran-red),var(--iran-red-2));color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;box-shadow:0 4px 12px rgba(176,32,63,.35);}
+
+main{padding:14px 14px;max-width:540px;margin:0 auto;}
+.card{
+  background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:16px 16px;margin-bottom:14px;box-shadow:var(--shadow-sm);
+}
+body[data-theme="dark"] .card{background:rgba(27,30,61,.94);}
+.card h3{margin:0 0 12px;font-size:15px;color:var(--royal-purple);display:flex;align-items:center;gap:8px;font-weight:700;font-family:var(--font-heading);}
+body[data-theme="dark"] .card h3{color:var(--iran-gold-light);}
+.progress-wrap{display:flex;align-items:center;gap:16px;}
+.ring{position:relative;width:78px;height:78px;flex-shrink:0;}
+.ring svg{transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:var(--ivory-2);stroke-width:9;}
+.ring-fg{fill:none;stroke:url(#ringGrad);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset .6s ease;}
+.ring-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:var(--ink);font-family:var(--font-numeral);}
+.progress-txt{font-size:13px;color:var(--ink-soft);line-height:1.9;}
+.progress-txt b{color:var(--ink);font-family:var(--font-numeral);}
+
+/* live clock */
+.clock-card{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.clock-wrap{position:relative;}
+.clock-digital{font-size:17px;font-weight:600;color:var(--royal-purple);letter-spacing:1.5px;direction:ltr;font-family:var(--font-numeral);}
+.clock-caption{font-size:11.5px;color:var(--ink-soft);margin-top:2px;}
+
+/* holiday ask */
+.holiday-ask{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.holiday-ask p{margin:0;font-size:13.5px;color:var(--ink-soft);}
+.seg{display:flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--ivory-2);padding:3px;gap:3px;}
+.seg button{border:none;background:transparent;padding:8px 14px;border-radius:16px;font-family:inherit;font-size:12.5px;cursor:pointer;color:var(--ink-soft);transition:background .15s,color .15s;}
+.seg button.active{background:var(--royal-purple);color:#fff!important;box-shadow:0 4px 10px rgba(91,62,153,.3);border-radius:16px!important;}
+.seg button.active.holiday{background:linear-gradient(120deg,var(--iran-red),var(--iran-red-2))!important;color:#fff!important;}
+.api-note{font-size:11px;color:var(--ink-soft);margin-top:8px;display:flex;align-items:center;gap:5px;}
+.dot{width:7px;height:7px;border-radius:50%;background:#ccc;flex-shrink:0;}
+.dot.ok{background:var(--done);}
+.dot.fail{background:var(--iran-red);}
+
+/* missed items */
+.missed-card{border:1px solid var(--rule);background:var(--paper);border-right:4px solid var(--iran-red);}
+.missed-card h3{color:var(--iran-red);}
+.missed-day{border:1px solid var(--rule);background:var(--ivory-2);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px;}
+.missed-day-hd{font-weight:700;font-size:13px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;color:var(--royal-purple);font-family:var(--font-heading);}
+.missed-day .seg{margin-bottom:8px;}
+.missed-item{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:6px;border-right:4px solid var(--rule);}
+.missed-item .mi-text{flex:1;font-size:12.5px;line-height:1.7;}
+.missed-item .mi-date{color:var(--ink-soft);font-size:11px;}
+.missed-item button{border:none;background:var(--royal-purple);color:#fff;font-family:inherit;font-size:11.5px;padding:8px 12px;border-radius:14px;cursor:pointer;flex-shrink:0;}
+.missed-item button.secondary{background:var(--ivory-2);color:var(--ink-soft);}
+
+/* homework note */
+.hw-note{width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 12px;font-family:inherit;font-size:12.5px;resize:vertical;min-height:52px;margin-top:9px;background:var(--ivory);}
+.hw-note-label{font-size:11.5px;color:var(--ink-soft);margin-top:9px;margin-bottom:4px;}
+.book-note-preview{font-size:11px;color:var(--royal-purple);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px;}
+
+/* book cards */
+.book{
+  border:1px solid var(--rule);border-radius:var(--radius-sm);margin-bottom:9px;overflow:hidden;background:var(--paper);box-shadow:var(--shadow-sm);
+}
+.book.done{background:#EAF7F0;border-color:var(--done);}
+.book.closed{opacity:.55;}
+.book-head{display:flex;align-items:center;gap:10px;padding:12px 13px;cursor:pointer;}
+.book-icon{width:34px;height:34px;border-radius:12px;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;box-shadow:0 4px 10px rgba(0,0,0,.12);}
+.book-name{flex:1;font-size:14px;font-weight:700;font-family:var(--font-heading);}
+.book-status{font-size:11px;color:var(--ink-soft);}
+.chev{font-size:12px;color:var(--ink-soft);transition:transform .25s;}
+.book.open .chev{transform:rotate(180deg);}
+.book-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+.book.open .book-body{max-height:240px;}
+.book-inner{padding:0 13px 13px;border-top:1px solid var(--rule);}
+.hw-q{font-size:13px;color:var(--ink-soft);margin:10px 0 8px;}
+.hw-btns{display:flex;gap:8px;}
+.hw-btns button{flex:1;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--ivory);font-family:inherit;font-size:13px;cursor:pointer;}
+.hw-btns button.yes.active{background:var(--royal-purple);color:#fff;border-color:var(--royal-purple);}
+.hw-btns button.no.active{background:var(--ivory-2);color:var(--ink-soft);border-color:var(--line);}
+.check-row{display:flex;align-items:center;gap:10px;margin-top:10px;padding:10px 12px;background:var(--ivory-2);border-radius:var(--radius-sm);border:1px solid var(--rule);}
+.check-row input{width:18px;height:18px;accent-color:var(--done);}
+.check-row label{font-size:13px;flex:1;cursor:pointer;}
+.badge{font-size:10.5px;padding:3px 10px;border-radius:20px;background:var(--ivory-2);color:var(--ink);font-weight:700;}
+.badge.done{background:#D3F0E0;color:var(--done);}
+
+.empty{text-align:center;padding:26px 10px;color:var(--ink-soft);font-size:13.5px;}
+.empty .em-icon{font-size:30px;margin-bottom:8px;}
+
+/* weekly schedule editor */
+.day-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;}
+.day-tabs button{flex-shrink:0;border:1px solid var(--line);background:var(--paper);padding:8px 14px;border-radius:20px;font-family:inherit;font-size:12px;cursor:pointer;color:var(--ink-soft);}
+.day-tabs button.active{background:var(--royal-purple);color:#fff;border-color:var(--royal-purple);}
+.day-tabs button.is-holiday{border-color:var(--iran-red);color:var(--iran-red);}
+.day-tabs button.is-holiday.active{background:var(--iran-red);color:#fff;border-color:var(--iran-red);}
+.book-pick{display:flex;flex-wrap:wrap;gap:8px;}
+.book-pick .chip{border:1px solid var(--line);border-radius:20px;padding:9px 13px;font-size:12.5px;cursor:pointer;background:var(--paper);display:flex;align-items:center;gap:6px;transition:transform .1s;}
+.book-pick .chip:active{transform:scale(.96);}
+.book-pick .chip.active{color:#fff;border-color:transparent;box-shadow:0 4px 10px rgba(0,0,0,.15);}
+.save-note{font-size:11.5px;color:var(--ink-soft);margin-top:12px;text-align:center;line-height:1.8;}
+
+/* calendar */
+.cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.cal-nav button{background:var(--ivory-2);border:none;width:36px;height:36px;border-radius:50%;font-size:16px;cursor:pointer;color:var(--royal-purple);}
+.cal-nav .cal-title{font-weight:700;color:var(--royal-purple);font-size:16px;font-family:var(--font-heading);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-grid .dow{text-align:center;font-size:10.5px;color:var(--ink-soft);padding-bottom:6px;font-weight:600;}
+.cal-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;}
+.day-num{width:30px;height:30px;max-width:86%;max-height:86%;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:11.5px;color:var(--ink);background:transparent;transition:background .15s,transform .15s;font-family:var(--font-numeral);}
+.cal-cell:active .day-num{transform:scale(.9);}
+.cal-cell.today .day-num{width:34px;height:34px;background:linear-gradient(135deg,var(--royal-purple),var(--royal-blue));color:#fff;font-weight:700;font-size:13px;box-shadow:0 4px 12px rgba(91,62,153,.4);}
+.cal-cell.holiday .day-num{background:#FBE1E7;color:var(--iran-red);}
+.cal-cell.holiday.today .day-num{background:linear-gradient(135deg,var(--royal-purple),var(--royal-blue));color:#fff;box-shadow:0 0 0 3px #FBE1E7;}
+.cal-cell.note::after{content:'';position:absolute;bottom:1px;width:5px;height:5px;border-radius:50%;background:var(--iran-gold);}
+.cal-cell.empty{visibility:hidden;}
+.legend{display:flex;gap:14px;margin-top:12px;font-size:11.5px;color:var(--ink-soft);flex-wrap:wrap;}
+.legend span{display:flex;align-items:center;gap:5px;}
+.sw{width:10px;height:10px;border-radius:4px;}
+textarea.note-box{width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 12px;font-family:inherit;font-size:13px;resize:vertical;min-height:64px;margin-top:8px;background:var(--ivory);}
+.small-btn{margin-top:8px;background:linear-gradient(120deg,var(--royal-purple),var(--royal-blue));color:#fff;border:none;padding:10px 16px;border-radius:14px;font-family:inherit;font-size:12.5px;cursor:pointer;box-shadow:0 6px 16px rgba(91,62,153,.25);}
+.cal-day-event{font-size:12px;color:var(--iran-red);background:#FBE1E7;border-radius:var(--radius-sm);padding:10px 12px;margin-top:8px;}
+
+/* nav bar */
+nav.bottom{
+  position:fixed;bottom:12px;right:12px;left:12px;background:var(--paper);border:1px solid var(--rule);
+  display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+  box-shadow:var(--shadow-lg);z-index:20;border-radius:24px;
+}
+nav.bottom button{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink-soft);font-family:var(--font-body);font-size:9.5px;cursor:pointer;padding:6px 4px;min-width:0;flex:1;border-radius:16px;transition:background .15s,color .15s;}
+nav.bottom button .ic{font-size:18px;line-height:1.2;}
+nav.bottom button.active{color:var(--royal-purple);font-weight:700;background:var(--ivory-2);}
+
+.screen{display:none;}
+.screen.active{display:block;animation:fadein .25s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.section-title{font-family:var(--font-heading);font-weight:700;font-size:19px;color:var(--royal-purple);margin:8px 2px 14px;line-height:1.7;}
+body[data-theme="dark"] .section-title{color:var(--iran-gold-light);}
+
+/* install modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(21,26,61,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;backdrop-filter:blur(3px);}
+.modal-overlay.open{display:flex;}
+.modal-card{background:var(--paper);border-radius:var(--radius-lg);padding:20px;max-width:360px;width:100%;box-shadow:var(--shadow-lg);}
+.modal-card h3{margin:0 0 12px;color:var(--royal-purple);font-size:16px;font-family:var(--font-heading);}
+.modal-card ol{margin:0 0 14px;padding-right:20px;font-size:13px;line-height:2;color:var(--ink-soft);}
+.modal-card button{width:100%;background:linear-gradient(120deg,var(--royal-purple),var(--royal-blue));color:#fff;border:none;padding:12px;border-radius:14px;font-family:inherit;font-size:13.5px;cursor:pointer;}
+.toast{position:fixed;bottom:96px;right:50%;transform:translateX(50%);background:var(--royal-navy);color:#fff;
+  padding:10px 18px;border-radius:20px;font-size:12.5px;z-index:60;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;box-shadow:var(--shadow-lg);}
+.toast.show{opacity:1;transform:translateX(50%) translateY(-6px);}
+
+/* ---------- Lock screen ---------- */
+#lockScreen{
+  position:fixed;inset:0;z-index:999;
+  background:radial-gradient(circle at 20% 0%, rgba(91,62,153,.5), transparent 45%),
+             radial-gradient(circle at 90% 100%, rgba(201,162,39,.25), transparent 40%),
+             linear-gradient(160deg,var(--royal-navy),#0C0E23 70%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:26px 22px calc(26px + env(safe-area-inset-bottom));
+  overflow:hidden;
+}
+#lockScreen.unlocked{display:none;}
+#lockScreen .lock-deco{display:none;}
+#lockScreen .lock-frame{display:none;}
+.lock-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%;max-width:340px;}
+.lock-emblem{
+  width:76px;height:76px;border-radius:24px;
+  background:linear-gradient(135deg,var(--royal-purple),var(--royal-blue));
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;box-shadow:0 10px 30px rgba(91,62,153,.5);
+}
+.lock-emblem svg{display:block;}
+.lock-title{font-family:var(--font-display);font-weight:400;font-size:28px;color:var(--iran-gold-light);text-align:center;line-height:1.5;}
+.lock-sub{font-size:13px;color:#C7C2EA;margin-top:8px;text-align:center;line-height:2;font-family:var(--font-body);}
+.lock-dots{display:flex;gap:14px;margin:26px 0 6px;}
+.lock-dot{width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(232,199,102,.5);background:transparent;transition:background .15s;}
+.lock-dot.filled{background:var(--iran-gold-light);border-color:var(--iran-gold-light);}
+.lock-error{font-size:12px;color:#F0A0B4;height:18px;margin-bottom:6px;text-align:center;}
+.lock-dots-wrap.shake{animation:lockshake .38s ease;}
+@keyframes lockshake{
+  10%,90%{transform:translateX(-2px);}
+  20%,80%{transform:translateX(4px);}
+  30%,50%,70%{transform:translateX(-8px);}
+  40%,60%{transform:translateX(8px);}
+}
+.lock-keypad{display:grid;grid-template-columns:repeat(3,68px);gap:12px;margin-top:14px;}
+.lock-key{
+  width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);color:#F3EFFF;font-family:var(--font-numeral);font-weight:700;font-size:22px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;
+  transition:background .15s;backdrop-filter:blur(4px);
+}
+.lock-key:active{background:rgba(232,199,102,.25);}
+.lock-key.ghost{background:transparent;border:none;cursor:default;}
+.lock-key.func{font-size:13px;font-weight:600;}
+.lock-footer{margin-top:22px;font-size:11px;color:#8781AE;text-align:center;font-family:var(--font-body);line-height:1.8;}
+
+/* ---------- Reminders ---------- */
+.rem-form{display:flex;flex-direction:column;gap:9px;margin-bottom:14px;}
+.rem-time-row{display:flex;align-items:center;gap:8px;}
+.rem-time-row select{flex:1;border:1px solid var(--line);border-radius:var(--radius-sm);padding:9px 8px;font-family:inherit;font-size:14px;background:var(--ivory);color:var(--ink);}
+.rem-time-row .colon{font-weight:700;color:var(--royal-purple);}
+.rem-msg-input{width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);padding:9px 10px;font-family:inherit;font-size:13px;background:var(--ivory);}
+.rem-add-btn{background:linear-gradient(120deg,var(--iran-turq),#1F5F6B);color:#fff;border:none;padding:11px;border-radius:14px;font-family:inherit;font-size:13.5px;cursor:pointer;box-shadow:0 6px 16px rgba(44,122,123,.3);}
+.rem-item{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:6px;}
+.rem-item .rem-time{font-weight:700;color:var(--royal-purple);font-size:14px;direction:ltr;min-width:52px;text-align:center;font-family:var(--font-numeral);}
+.rem-item .rem-msg{flex:1;font-size:12.5px;line-height:1.7;color:var(--ink);}
+.rem-item .rem-del{border:none;background:var(--ivory-2);color:var(--iran-red);width:32px;height:32px;border-radius:50%;font-size:14px;cursor:pointer;flex-shrink:0;}
+.rem-empty{text-align:center;padding:14px 4px;color:var(--ink-soft);font-size:12.5px;}
+
+#reminderOverlay{
+  position:fixed;inset:0;z-index:900;display:none;
+  align-items:center;justify-content:center;padding:22px;
+  background:rgba(21,26,61,.6);backdrop-filter:blur(3px);
+}
+#reminderOverlay.open{display:flex;}
+.rem-modal{
+  background:var(--paper);
+  border-radius:var(--radius-lg);padding:26px 22px;max-width:340px;width:100%;
+  text-align:center;box-shadow:var(--shadow-lg);
+  animation:remPop .3s ease;
+}
+@keyframes remPop{from{transform:scale(.92);opacity:0;}to{transform:scale(1);opacity:1;}}
+.rem-modal .rem-bell{font-size:38px;margin-bottom:6px;}
+.rem-modal .rem-time-big{font-family:var(--font-numeral);font-weight:700;font-size:26px;color:var(--royal-purple);direction:ltr;line-height:1.5;}
+.rem-modal .rem-message{font-size:14.5px;color:var(--ink);line-height:2;margin:12px 0 18px;background:var(--ivory-2);border-radius:var(--radius-sm);padding:12px;}
+.rem-modal button{width:100%;background:linear-gradient(120deg,var(--royal-purple),var(--royal-blue));color:#fff;border:none;padding:13px;border-radius:16px;font-family:inherit;font-size:14.5px;font-weight:700;cursor:pointer;}
+
+/* ---------- Timer / Exams / Todos / Grades (More screen) ---------- */
+.timer-card{display:flex;flex-direction:column;align-items:center;}
+.timer-display{font-family:var(--font-numeral);font-weight:700;font-size:44px;color:var(--royal-purple);direction:ltr;letter-spacing:2px;line-height:1.3;}
+.timer-presets{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center;}
+.timer-presets button{border:1px solid var(--line);background:var(--ivory);color:var(--ink-soft);padding:7px 14px;border-radius:20px;font-family:inherit;font-size:12px;cursor:pointer;}
+.timer-presets button.active{background:var(--iran-gold);color:#3A2F0A;border-color:var(--iran-gold);font-weight:700;}
+.timer-btns{display:flex;gap:10px;margin-top:14px;width:100%;}
+.timer-btn{flex:1;border:1px solid var(--line);background:var(--ivory);color:var(--ink);padding:12px;border-radius:16px;font-family:inherit;font-size:14px;cursor:pointer;}
+.timer-btn.primary{background:linear-gradient(120deg,var(--iran-turq),#1F5F6B);color:#fff;border-color:transparent;font-weight:700;}
+
+.mini-form{display:flex;flex-direction:column;gap:9px;}
+.mini-form select,.mini-form input{border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 12px;font-family:inherit;font-size:13px;background:var(--ivory);color:var(--ink);width:100%;}
+
+.exam-item,.todo-item,.grade-item{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:6px;}
+.exam-item .exam-days{font-weight:700;color:var(--royal-purple);font-size:12.5px;min-width:56px;text-align:center;background:var(--ivory-2);border-radius:12px;padding:8px 4px;font-family:var(--font-numeral);}
+.exam-item.soon .exam-days{background:#FBE1E7;color:var(--iran-red);}
+.exam-item .exam-body{flex:1;}
+.exam-item .exam-book{font-size:13.5px;font-weight:700;}
+.exam-item .exam-meta{font-size:11px;color:var(--ink-soft);margin-top:2px;}
+.item-del{border:none;background:var(--ivory-2);color:var(--iran-red);width:32px;height:32px;border-radius:50%;font-size:14px;cursor:pointer;flex-shrink:0;}
+.todo-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--done);flex-shrink:0;}
+.todo-item .todo-text{flex:1;font-size:13px;}
+.todo-item.done .todo-text{text-decoration:line-through;color:var(--ink-soft);}
+.grade-item .grade-score{font-weight:700;color:var(--royal-purple);font-size:16px;min-width:38px;text-align:center;font-family:var(--font-numeral);}
+.grade-item.low .grade-score{color:var(--iran-red);}
+.grade-item .grade-body{flex:1;}
+.grade-item .grade-book{font-size:13px;font-weight:600;}
+.grade-item .grade-meta{font-size:11px;color:var(--ink-soft);margin-top:2px;}
+.exam-soon-banner{display:flex;align-items:center;gap:10px;background:#FBE1E7;border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:6px;font-size:12.5px;color:var(--iran-red);}
+
+body[data-theme="dark"] .timer-display{color:var(--iran-gold-light);}
+body[data-theme="dark"] .timer-presets button,body[data-theme="dark"] .timer-btn,
+body[data-theme="dark"] .mini-form select,body[data-theme="dark"] .mini-form input,
+body[data-theme="dark"] .exam-item,body[data-theme="dark"] .todo-item,body[data-theme="dark"] .grade-item,
+body[data-theme="dark"] .exam-item .exam-days{background:var(--ivory-2);color:var(--ink);border-color:var(--line);}
+
+/* ===== Typography system: distinct modern font per section ===== */
+.brand,.top-title,.lock-title{font-family:var(--font-display)!important;}
+.section-title{font-family:var(--font-heading)!important;}
+.card h3,.book-name,.goal-title,.cal-title,.missed-day-hd{font-family:var(--font-heading)!important;}
+button,input,select,textarea{font-family:var(--font-body)!important;}
+.stat-box .stat-num,.clock-digital,.timer-display,.day-num,.grade-score,.exam-days,.rem-time,.rem-time-big{font-family:var(--font-numeral)!important;}
+
+/* Progress dashboard */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;}
+.stat-box{border:1px solid var(--rule);background:var(--ivory-2);border-radius:var(--radius-sm);padding:12px 6px;text-align:center;}
+.stat-box .stat-num{font-family:var(--font-numeral);font-size:23px;font-weight:700;color:var(--royal-purple);line-height:1.3;direction:ltr;}
+.stat-box .stat-lbl{font-size:10.5px;color:var(--ink-soft);margin-top:2px;line-height:1.5;}
+.book-stat-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px dashed var(--line);}
+.book-stat-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.book-stat-swatch{width:12px;height:12px;flex-shrink:0;border-radius:4px;}
+.book-stat-bar-bg{background:var(--ivory-2);height:10px;border-radius:10px;overflow:hidden;flex:1;}
+.book-stat-bar-fg{height:100%;min-width:0;border-radius:10px;transition:width .45s ease;}
+.book-stat-meta{font-size:11px;color:var(--ink-soft);margin-top:3px;}
+.week-strip{display:flex;gap:5px;margin-top:10px;}
+.week-strip .wd{flex:1;text-align:center;border-radius:12px;padding:7px 2px;font-size:10px;background:var(--ivory-2);}
+.week-strip .wd .wd-pct{font-weight:700;font-size:12px;margin-top:2px;direction:ltr;font-family:var(--font-numeral);}
+.week-strip .wd.good{background:#D9F2E4;}
+.week-strip .wd.mid{background:#FBF0D2;}
+.week-strip .wd.bad{background:#FBE1E7;}
+.week-strip .wd.empty{opacity:.45;}
+.streak-banner{border-radius:var(--radius-sm);border-right:4px solid var(--iran-gold);padding:12px 14px;margin-bottom:12px;font-size:13px;line-height:1.8;background:linear-gradient(120deg,#FBF3DA,#F6EFDA);}
+body[data-theme="dark"] .streak-banner{background:linear-gradient(120deg,#2B2410,#1F1B10);}
+.grade-avg-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-top:4px;color:var(--ink-soft);}
+.study-time-note{font-size:12px;color:var(--ink-soft);margin-top:8px;border-top:1px solid var(--line);padding-top:8px;}
+
+/* Goal / path / readiness */
+.goal-card{border-radius:var(--radius-lg);background:linear-gradient(135deg,var(--royal-navy),var(--royal-purple));color:#fff;padding:18px;margin-bottom:14px;box-shadow:var(--shadow-lg);}
+.goal-card .goal-kicker{font-size:11px;color:var(--iran-gold-light);letter-spacing:.04em;margin-bottom:4px;font-weight:600;}
+.goal-card .goal-title{font-family:var(--font-heading);font-size:21px;font-weight:700;color:#fff;line-height:1.6;}
+.goal-card .goal-sub{font-size:12.5px;color:#D6D0F0;margin-top:6px;line-height:1.9;}
+.goal-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.goal-chip{border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 12px;font-size:11.5px;background:rgba(255,255,255,.08);}
+.goal-chip b{color:var(--iran-gold-light);}
+.readiness-wrap{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.15);}
+.readiness-bar-bg{height:12px;border-radius:10px;background:rgba(255,255,255,.14);overflow:hidden;}
+.readiness-bar-fg{height:100%;background:linear-gradient(90deg,var(--iran-gold),var(--iran-gold-light));border-radius:10px;transition:width .5s ease;}
+.readiness-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;font-weight:700;}
+.focus-card{border-radius:var(--radius);padding:14px;margin-bottom:14px;background:linear-gradient(120deg,#FBF0FF,#F0ECFC);border:1px solid var(--rule);}
+body[data-theme="dark"] .focus-card{background:linear-gradient(120deg,#241F44,#1D1938);}
+.focus-card h4{margin:0 0 6px;font-size:13.5px;color:var(--royal-purple);font-family:var(--font-heading);}
+.focus-card p{margin:0;font-size:12.5px;line-height:1.9;color:var(--ink);}
+.priority-tag{font-size:10px;border-radius:10px;padding:2px 8px;margin-right:6px;vertical-align:middle;}
+.priority-tag.p3{background:#FBE1E7;color:var(--iran-red);}
+.priority-tag.p2{background:#FBF0D2;color:#8A6D1A;}
+.priority-tag.p1{background:var(--ivory-2);color:var(--ink-soft);}
+.milestone-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);}
+.milestone-item:last-child{border-bottom:none;}
+.milestone-item input{width:18px;height:18px;margin-top:3px;accent-color:var(--done);flex-shrink:0;}
+.milestone-item.done .ms-text{text-decoration:line-through;color:var(--ink-soft);}
+.ms-text{flex:1;font-size:13px;line-height:1.7;}
+.weak-list{margin:0;padding:0 0 0 18px;font-size:12.5px;line-height:1.9;}
+.weak-list li{margin-bottom:4px;}
+.tip-inline{font-size:11.5px;color:var(--ink-soft);margin-top:2px;line-height:1.7;}
+
+/* Online Q&A */
+.ask-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;}
+.ask-chip{border:1px solid var(--line);border-radius:20px;background:var(--paper);padding:7px 12px;font-size:12px;cursor:pointer;font-family:var(--font-body);color:var(--ink);}
+.ask-chip:active{background:var(--royal-purple);color:#fff;border-color:var(--royal-purple);}
+.ask-result{margin-top:12px;border-radius:var(--radius);border-right:4px solid var(--royal-purple);padding:14px;background:var(--ivory-2);display:none;}
+.ask-result.open{display:block;}
+.ask-result h4{margin:0 0 8px;font-size:15px;color:var(--royal-purple);font-family:var(--font-heading);}
+.ask-result .ask-body{font-size:14px;line-height:2;color:var(--ink);}
+.ask-result .ask-links{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;}
+.ask-result .ask-links a{font-size:12.5px;color:var(--royal-purple);border:1px solid var(--line);border-radius:14px;padding:6px 12px;text-decoration:none;background:var(--paper);}
+.ask-loading{font-size:13px;color:var(--ink-soft);padding:8px 0;}
+.textbook-list{display:flex;flex-direction:column;gap:0;}
+.textbook-item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);text-decoration:none;color:var(--ink);}
+.textbook-item:last-child{border-bottom:none;}
+.textbook-item .tb-code{font-size:11px;border-radius:8px;background:var(--ivory-2);padding:3px 7px;min-width:36px;text-align:center;font-family:var(--font-numeral);}
+.textbook-item .tb-name{flex:1;font-size:14px;font-weight:600;}
+.textbook-item .tb-dl{font-size:12px;color:var(--royal-purple);border:1px solid var(--line);border-radius:14px;padding:5px 10px;background:var(--ivory);}
+
+/* AI Chat */
+.ai-settings{display:none;flex-direction:column;gap:8px;margin-bottom:8px;}
+.ai-settings.open{display:flex;}
+.ai-label{font-size:12px;color:var(--ink-soft);margin-top:4px;}
+.ai-chat-card{display:flex;flex-direction:column;min-height:320px;padding-bottom:10px;}
+.ai-messages{flex:1;max-height:42vh;overflow-y:auto;border-radius:var(--radius-sm);background:var(--ivory-2);padding:10px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px;}
+.ai-bubble{max-width:92%;padding:9px 13px;font-size:14px;line-height:1.85;border-radius:16px;}
+.ai-bubble.user{align-self:flex-start;background:var(--paper);border:1px solid var(--rule);border-right:3px solid var(--royal-purple);}
+.ai-bubble.bot{align-self:flex-end;background:linear-gradient(120deg,var(--royal-navy),var(--royal-purple));color:#fff;}
+body[data-theme="dark"] .ai-bubble.bot{background:linear-gradient(120deg,var(--royal-navy),var(--royal-purple));}
+.ai-bubble .ai-role{font-size:11px;opacity:.75;margin-bottom:2px;}
+.ai-input-row{display:flex;gap:8px;align-items:flex-end;}
+.ai-input-row textarea{flex:1;border:1px solid var(--line);border-radius:var(--radius-sm);padding:9px;font-family:var(--font-body);font-size:14px;resize:vertical;min-height:52px;background:var(--ivory);color:var(--ink);}
+.ai-quick{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.ai-bubble.err{background:#FBE1E7;color:#7A1030;}
+
+/* Footer */
+.app-footer{
+  max-width:540px;margin:8px auto 100px;padding:20px 16px;
+  text-align:center;
+}
+.app-footer .footer-rule{border-top:1px solid var(--line);margin:10px auto;width:60%;}
+.app-footer .footer-motto{
+  font-family:var(--font-heading);font-size:14px;color:var(--royal-purple);
+  line-height:1.8;margin-bottom:6px;
+}
+.app-footer .footer-meta{
+  font-size:11px;color:var(--ink-soft);margin-top:6px;line-height:1.8;
+}
+
+/* Profile — modern byline card */
+.profile-card{
+  display:flex;align-items:center;gap:12px;
+  background:var(--paper);border:1px solid var(--rule);
+  padding:14px 16px;border-radius:var(--radius);margin:12px auto 14px;max-width:540px;
+  box-shadow:var(--shadow-sm);
+}
+.profile-avatar{
+  width:52px;height:52px;border-radius:16px;flex:0 0 52px;
+  background:linear-gradient(135deg,var(--royal-purple),var(--royal-blue));display:grid;place-items:center;
+}
+.profile-avatar svg{width:32px;height:32px}
+.profile-avatar svg *{stroke:#fff!important;}
+.profile-meta{flex:1}
+.profile-name{font-family:var(--font-heading);font-size:17px;font-weight:700;color:var(--ink);line-height:1.6}
+.profile-sub{font-size:11px;color:var(--ink-soft);margin-top:2px;}
+.profile-edit{
+  border:1px solid var(--line);border-radius:14px;padding:8px 12px;background:var(--ivory-2);color:var(--royal-purple);
+  font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer;
+}
+.profile-edit:active{background:var(--ivory)}
+.profile-modal .profile-fields{display:flex;flex-direction:column;gap:10px}
+.profile-modal input{width:100%;padding:11px;border:1px solid var(--line);border-radius:var(--radius-sm);font-family:var(--font-body);background:var(--ivory);color:var(--ink);font-size:14px}
+.profile-modal .actions{display:flex;gap:8px;margin-top:12px}
+.profile-modal .actions button{flex:1;border:none;border-radius:14px;padding:11px;font-family:var(--font-body);font-size:14px;cursor:pointer}
+.profile-save{background:linear-gradient(120deg,var(--royal-purple),var(--royal-blue));color:#fff}
+.profile-close{background:var(--ivory-2);color:var(--ink-soft)}
+
+.cal-day-event .ev-title{font-weight:700;margin-bottom:4px;font-size:13.5px}
+.cal-day-event .ev-detail{color:var(--ink);font-size:12.5px}
+
+@media(max-width:390px){
+  .profile-name{font-size:16px}
+  .top-title{font-size:25px}
+}
+
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5B3E99"/>
+      <stop offset="1" stop-color="#2C3E8C"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- LOCK SCREEN -->
+<div id="lockScreen">
+  <svg class="lock-deco" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+    <g fill="none" stroke="#E9CA82" stroke-width="1">
+      <path d="M200 20 L380 200 L200 380 L20 200 Z"/>
+      <path d="M200 70 L330 200 L200 330 L70 200 Z"/>
+      <circle cx="200" cy="200" r="46"/>
+      <path d="M200 20 V380 M20 200 H380"/>
+    </g>
+  </svg>
+  <div class="lock-frame"></div>
+  <div class="lock-content">
+    <div class="lock-emblem" aria-hidden="true">
+      <svg viewBox="0 0 64 64" width="42" height="42">
+        <rect x="8" y="8" width="48" height="48" rx="14" fill="none" stroke="#E8C766" stroke-width="2.5"/>
+        <text x="32" y="43" text-anchor="middle" font-family="'Lalezar',sans-serif" font-size="30" font-weight="400" fill="#fff">پ</text>
+      </svg>
+    </div>
+    <div class="lock-title brand">پلنر من</div>
+    <div class="lock-sub">این پلنر قفل است.<br>برای ورود، رمز عبور را وارد کنید.</div>
+    <div class="lock-dots-wrap" id="lockDotsWrap">
+      <div class="lock-dots" id="lockDots">
+        <div class="lock-dot"></div>
+        <div class="lock-dot"></div>
+        <div class="lock-dot"></div>
+        <div class="lock-dot"></div>
+      </div>
+    </div>
+    <div class="lock-error" id="lockError"></div>
+    <div class="lock-keypad" id="lockKeypad">
+      <button class="lock-key" data-k="1" onclick="lockPress('1')">۱</button>
+      <button class="lock-key" data-k="2" onclick="lockPress('2')">۲</button>
+      <button class="lock-key" data-k="3" onclick="lockPress('3')">۳</button>
+      <button class="lock-key" data-k="4" onclick="lockPress('4')">۴</button>
+      <button class="lock-key" data-k="5" onclick="lockPress('5')">۵</button>
+      <button class="lock-key" data-k="6" onclick="lockPress('6')">۶</button>
+      <button class="lock-key" data-k="7" onclick="lockPress('7')">۷</button>
+      <button class="lock-key" data-k="8" onclick="lockPress('8')">۸</button>
+      <button class="lock-key" data-k="9" onclick="lockPress('9')">۹</button>
+      <button class="lock-key func" onclick="lockClear()">پاک</button>
+      <button class="lock-key" data-k="0" onclick="lockPress('0')">۰</button>
+      <button class="lock-key func" onclick="lockBackspace()">⌫</button>
+    </div>
+    <div class="lock-footer">پایه نهم · سال تحصیلی · نسخهٔ چاپی</div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="top-row">
+    <div>
+      <div class="top-title brand">پلنر من</div>
+      <div class="top-sub">پایه نهم · تجربی · مسیر نمونه دولتی</div>
+    </div>
+    <div class="top-btns">
+      <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="حالت شب/روز">🌙</button>
+      <button class="icon-btn" id="refreshBtn" onclick="fullRefresh()" title="به‌روزرسانی">🔄</button>
+      <button class="icon-btn" onclick="goScreen('setup')" title="برنامه هفتگی">⚙</button>
+    </div>
+  </div>
+  <div class="date-chip">
+    <div>
+      <div class="jdate" id="hdrJDate">—</div>
+      <div class="weekday" id="hdrWeekday">—</div>
+    </div>
+    <div class="holiday-pill" id="hdrHolidayPill" style="display:none">امروز تعطیل 🌙</div>
+  </div>
+</header>
+
+<div class="profile-card">
+  <div class="profile-avatar" id="profileAvatar">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="22" r="11" fill="none" stroke="#1A1510" stroke-width="2"/><path d="M14 54c2-13 10-19 18-19s16 6 18 19" fill="none" stroke="#1A1510" stroke-width="2"/></svg>
+  </div>
+  <div class="profile-meta">
+    <div class="profile-name" id="profileName">نام من</div>
+    <div class="profile-sub" id="profileBio">پایه نهم · تجربی · هدف: نمونه دولتی</div>
+  </div>
+  <button class="profile-edit" onclick="openProfileModal()">ویرایش</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="installModal">
+  <div class="modal-card">
+    <h3>📲 افزودن پلنر به صفحه اصلی</h3>
+    <ol id="installSteps">
+      <li>مرورگر Chrome رو باز کن</li>
+      <li>روی سه‌نقطه بالای صفحه بزن</li>
+      <li>«افزودن به صفحه اصلی» یا «Install app» رو انتخاب کن</li>
+    </ol>
+    <button onclick="document.getElementById('installModal').classList.remove('open')">متوجه شدم</button>
+  </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal-overlay profile-modal" id="profileModal">
+  <div class="modal-card">
+    <h3>👤 پروفایل من</h3>
+    <div class="profile-fields">
+      <input id="profileNameInp" maxlength="40" placeholder="نام من">
+      <input id="profileBioInp" maxlength="80" placeholder="مثلاً: پایه نهم · تجربی · نمونه دولتی">
+    </div>
+    <div class="actions">
+      <button class="profile-save" onclick="saveProfile()">ذخیره</button>
+      <button class="profile-close" onclick="closeProfileModal()">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<!-- PERSISTENT REMINDER OVERLAY: stays until "دیدمش😉" is tapped -->
+<div id="reminderOverlay">
+  <div class="rem-modal">
+    <div class="rem-bell">⏰</div>
+    <div class="rem-time-big" id="remOverlayTime">--:--</div>
+    <div class="rem-message" id="remOverlayMsg"></div>
+    <button onclick="dismissActiveReminder()">دیدمش😉</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- TODAY SCREEN -->
+  <section class="screen active" id="screen-today">
+
+    <div class="goal-card" id="goalCard">
+      <div class="goal-kicker">مسیر امسال · پایه نهم</div>
+      <div class="goal-title" id="goalTitleText">رشته تجربی → نمونه دولتی</div>
+      <div class="goal-sub" id="goalSubText">تمرکز روی علوم، ریاضی و فارسی؛ معدل هدف ۱۸ به بالا.</div>
+      <div class="goal-meta">
+        <span class="goal-chip">رشته: <b id="goalFieldChip">تجربی</b></span>
+        <span class="goal-chip">هدف: <b id="goalTargetChip">نمونه دولتی</b></span>
+        <span class="goal-chip">معدل هدف: <b id="goalAvgChip">۱۸</b></span>
+      </div>
+      <div class="readiness-wrap">
+        <div class="readiness-label"><span>آمادگی مسیر</span><span id="readinessPctLabel">۰٪</span></div>
+        <div class="readiness-bar-bg"><div class="readiness-bar-fg" id="readinessBar" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="focus-card" id="focusCard">
+      <h4>🎯 تمرکز امروز</h4>
+      <p id="focusText">برنامه امروز را از بخش کتاب‌ها تکمیل کن.</p>
+    </div>
+
+    <div class="card clock-card">
+      <div class="clock-wrap">
+        <svg viewBox="0 0 200 200" width="168" height="168">
+          <circle cx="100" cy="100" r="94" fill="#fff" stroke="var(--iran-gold)" stroke-width="3.5"/>
+          <circle cx="100" cy="100" r="84" fill="none" stroke="var(--iran-green-2)" stroke-width="1" stroke-dasharray="1.5 5" opacity=".45"/>
+          <g id="clockTicks"></g>
+          <g id="clockNumerals"></g>
+          <g id="clockHourHand"><line x1="100" y1="100" x2="100" y2="62" stroke="var(--iran-green)" stroke-width="5" stroke-linecap="round"/></g>
+          <g id="clockMinHand"><line x1="100" y1="100" x2="100" y2="42" stroke="var(--iran-green)" stroke-width="3.5" stroke-linecap="round"/></g>
+          <g id="clockSecHand"><line x1="100" y1="100" x2="100" y2="36" stroke="var(--iran-turq)" stroke-width="1.4" stroke-linecap="round"/></g>
+          <circle cx="100" cy="100" r="5.5" fill="var(--iran-gold)" stroke="var(--iran-green)" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div class="clock-digital" id="clockDigital">--:--:--</div>
+      <div class="clock-caption">ساعت زنده گوشی</div>
+    </div>
+
+    <div class="card">
+      <h3>📊 پیشرفت امروز</h3>
+      <div class="progress-wrap">
+        <div class="ring">
+          <svg width="78" height="78" viewBox="0 0 78 78">
+            <circle class="ring-bg" cx="39" cy="39" r="32"></circle>
+            <circle class="ring-fg" id="ringToday" cx="39" cy="39" r="32" stroke-dasharray="201" stroke-dashoffset="201"></circle>
+          </svg>
+          <div class="ring-label" id="ringTodayLabel">0%</div>
+        </div>
+        <div class="progress-txt" id="progressTxtToday">هنوز کتابی بررسی نشده.</div>
+      </div>
+    </div>
+
+    <div class="card" id="holidayCard">
+      <h3>🗓 وضعیت امروز</h3>
+      <div id="weekendNotice" style="display:none;font-size:13.5px;color:var(--ink-soft);line-height:1.9;">
+        📅 پنجشنبه و جمعه طبق تعطیلات رسمی همیشه تعطیل‌اند — نیازی به پرسیدن نیست.
+      </div>
+      <div class="holiday-ask" id="holidayAskRow">
+        <p>آیا امروز تعطیل رسمی است؟</p>
+        <div class="seg" id="holidaySeg">
+          <button data-v="no" onclick="setHolidayOverride(false)">خیر</button>
+          <button data-v="yes" class="holiday" onclick="setHolidayOverride(true)">بله</button>
+        </div>
+      </div>
+      <div class="api-note" id="apiNoteRow"><span class="dot" id="apiDot"></span><span id="apiNoteTxt">در حال بررسی تقویم زنده…</span></div>
+    </div>
+
+    <div class="card" id="examSoonCard" style="display:none">
+      <h3>📝 امتحانات نزدیک</h3>
+      <div id="examSoonList"></div>
+    </div>
+
+    <div class="card missed-card" id="missedCard" style="display:none">
+      <h3>⏰ جا مونده‌ها</h3>
+      <div id="missedList"></div>
+    </div>
+
+    <div id="booksArea"></div>
+
+  </section>
+
+  <!-- CALENDAR SCREEN -->
+  <section class="screen" id="screen-calendar">
+    <div class="section-title">تقویم شمسی</div>
+    <div class="card">
+      <div class="cal-nav">
+        <button onclick="calShift(-1)">›</button>
+        <div class="cal-title" id="calTitle">—</div>
+        <button onclick="calShift(1)">‹</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--iran-green-2)"></i> امروز</span>
+        <span><i class="sw" style="background:#FBE4E4"></i> تعطیل</span>
+        <span><i class="sw" style="background:var(--iran-gold)"></i> یادداشت</span>
+      </div>
+      <div class="api-note" id="calApiNote" style="margin-top:10px;"><span class="dot" id="calApiDot"></span><span id="calApiTxt">در حال اتصال به تقویم رسمی…</span></div>
+    </div>
+    <div class="card" id="calDayCard" style="display:none">
+      <h3 id="calDayTitle">روز</h3>
+      <div id="calDayEvent"></div>
+      <textarea class="note-box" id="calNoteBox" placeholder="کار یا یادآوری برای این روز…"></textarea>
+      <button class="small-btn" onclick="saveCalNote()">ذخیره یادداشت</button>
+    </div>
+  </section>
+
+  <!-- SETUP / WEEKLY SCHEDULE -->
+  <section class="screen" id="screen-setup">
+    <div class="section-title">برنامه هفتگی کتاب‌ها</div>
+    <div class="card">
+      <div class="day-tabs" id="dayTabs"></div>
+      <div class="book-pick" id="bookPick"></div>
+      <div class="save-note">هر روز، کتاب‌هایی که آن روز باید بخوانی را انتخاب کن. این برنامه هر شب برای فردا استفاده می‌شود و هر زمان قابل ویرایش است.</div>
+    </div>
+
+    <div class="section-title">⏰ یادآورهای شخصی</div>
+    <div class="card">
+      <div class="rem-form">
+        <div class="rem-time-row">
+          <select id="remHour"></select>
+          <span class="colon">:</span>
+          <select id="remMinute"></select>
+        </div>
+        <input type="text" class="rem-msg-input" id="remMsg" placeholder="پیام یادآوری، مثلاً: کتاب ریاضی رو بردار">
+        <button class="rem-add-btn" id="remAddBtn" onclick="addReminder()">➕ افزودن یادآوری</button>
+        <button class="rem-add-btn" id="remCancelBtn" style="display:none;background:#eee;color:var(--ink-soft);" onclick="cancelEditReminder()">لغو ویرایش</button>
+      </div>
+      <div id="reminderList"></div>
+      <div class="save-note">در زمان تعیین‌شده، اگر برنامه در حال اجرا یا در پس‌زمینهٔ قابل‌اجرا باشد اعلان سیستمی با متن کامل، ویبرهٔ درخواستی و حالت ماندگار ارسال می‌شود. برای اعلان واقعی باید یک‌بار از بخش «اعلان‌های گوشی» اجازه بدهی. توجه: وب‌اپِ کاملاً استاتیک روی GitHub به‌تنهایی نمی‌تواند وقتی مرورگر کاملاً بسته است، مثل اپ بومی خودش را دقیقاً در ساعت دلخواه بیدار کند؛ برای تضمین اعلان در حالت کاملاً بسته، Push/Backend لازم است.</div>
+    </div>
+
+    <div class="section-title">🔔 اعلان‌های گوشی</div>
+    <div class="card" id="notificationCard">
+      <div class="api-note" style="margin-top:0;">
+        <span class="dot" id="notifyDot"></span>
+        <span id="notifyStatus">وضعیت اعلان‌ها در حال بررسی…</span>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <button class="small-btn" style="flex:1;margin-top:0;" onclick="enableNotifications()">🔔 فعال‌سازی اعلان</button>
+        <button class="small-btn" style="flex:1;margin-top:0;background:var(--iran-turq);" onclick="testNotification()">🧪 تست اعلان</button>
+      </div>
+      <div class="save-note">برای اعلان واقعی، نسخهٔ HTTPS (مثل GitHub Pages) را نصب کن و یک‌بار «فعال‌سازی اعلان» را با لمس خودت انجام بده. متن کامل پیام به اعلان سیستم فرستاده می‌شود و ویبرهٔ درخواستی هم تنظیم شده است.</div>
+    </div>
+
+    <div class="section-title">💾 پشتیبان‌گیری از اطلاعات</div>
+    <div class="card">
+      <div class="save-note" style="margin-top:0;">همه اطلاعات (برنامه هفتگی، وضعیت روزها، یادداشت‌ها، یادآورها) داخل مرورگر ذخیره می‌شود. برای این‌که اگر مرورگر یا حافظه پاک شد چیزی از دست نره، هر چند وقت یک‌بار یک فایل پشتیبان بگیر.</div>
+      <button class="small-btn" style="width:100%;margin-top:10px;" onclick="exportBackup()">⬇️ دریافت فایل پشتیبان</button>
+      <label class="small-btn" style="width:100%;margin-top:8px;display:block;text-align:center;background:var(--iran-turq);cursor:pointer;">
+        ⬆️ بازیابی از فایل پشتیبان
+        <input type="file" accept="application/json" style="display:none;" onchange="importBackupFile(this.files[0])">
+      </label>
+    </div>
+
+    <div class="section-title">📲 نصب روی صفحه اصلی</div>
+    <div class="card">
+      <div class="save-note" style="margin-top:0;">پلنر را مثل یک اپلیکیشن روی صفحه اصلی گوشی نصب کن تا سریع‌تر باز شود.</div>
+      <button class="small-btn" style="width:100%;margin-top:10px;" id="installBtn" onclick="installApp()">📲 افزودن به صفحه اصلی</button>
+    </div>
+  </section>
+
+
+  <!-- PROGRESS SCREEN -->
+  <section class="screen" id="screen-progress">
+    <div class="section-title">پیشرفت و کارنامهٔ درسی</div>
+    <div class="streak-banner" id="streakBanner">برای ساختن زنجیرهٔ مطالعه، هر روز تکالیف را ثبت کن.</div>
+    <div class="card">
+      <div class="stat-grid" id="statGrid">
+        <div class="stat-box"><div class="stat-num" id="statWeekPct">۰٪</div><div class="stat-lbl">هفته اخیر</div></div>
+        <div class="stat-box"><div class="stat-num" id="statStreak">۰</div><div class="stat-lbl">روز پیاپی</div></div>
+        <div class="stat-box"><div class="stat-num" id="statStudyMin">۰</div><div class="stat-lbl">دقیقه مطالعه</div></div>
+      </div>
+      <div class="progress-wrap" style="margin-top:14px;">
+        <div class="ring">
+          <svg width="78" height="78" viewBox="0 0 78 78">
+            <circle class="ring-bg" cx="39" cy="39" r="32"></circle>
+            <circle class="ring-fg" id="ringWeek" cx="39" cy="39" r="32" stroke-dasharray="201" stroke-dashoffset="201"></circle>
+          </svg>
+          <div class="ring-label" id="ringWeekLabel">0%</div>
+        </div>
+        <div class="progress-txt" id="progressTxtWeek">آمار ۷ روز اخیر</div>
+      </div>
+      <div id="weekStrip" class="week-strip"></div>
+    </div>
+    <div class="card" id="bookStatsCard">
+      <h3>وضعیت هر درس — ۳۰ روز اخیر</h3>
+      <div id="bookStats"></div>
+    </div>
+    <div class="card" id="gradeAvgCard">
+      <h3>میانگین نمرات به تفکیک درس</h3>
+      <div id="gradeAvgList"></div>
+    </div>
+  </section>
+
+  <!-- MORE SCREEN: study timer, exams, general to-dos, grades -->
+  <section class="screen" id="screen-more">
+
+    <div class="card" style="background:linear-gradient(120deg,var(--royal-navy),var(--royal-purple));color:#fff;cursor:pointer;display:flex;align-items:center;gap:12px;" onclick="goScreen('ai')">
+      <div style="font-size:28px;">🤖</div>
+      <div style="flex:1;">
+        <div style="font-family:var(--font-heading);font-weight:700;font-size:15px;">چت با Grok · کتاب نهم</div>
+        <div style="font-size:11.5px;color:#D6D0F0;margin-top:2px;">سؤالات درسی را بر اساس کتاب‌های رسمی بپرس</div>
+      </div>
+      <div style="font-size:18px;color:var(--iran-gold-light);">‹</div>
+    </div>
+
+    <div class="section-title">❓ پرسش درسی (نظام نهم ۱۴۰۵–۱۴۰۶ + گوگل)</div>
+    <div class="card">
+      <div class="save-note" style="margin-top:0;margin-bottom:8px;">سؤال را بر اساس کتاب‌های رسمی پایه نهم بنویس. جست‌وجوی گوگل با قید «کتاب درسی نهم ۱۴۰۵» محدود می‌شود.</div>
+      <div class="mini-form">
+        <select id="askSubjectSel">
+          <option value="">همه دروس / تشخیص خودکار</option>
+          <option value="علوم تجربی">علوم تجربی (۹۰۶)</option>
+          <option value="ریاضی">ریاضی (۹۰۵)</option>
+          <option value="فارسی">فارسی (۹۰۳)</option>
+          <option value="نگارش">نگارش (۹۰۴)</option>
+          <option value="عربی">عربی (۹۰۹)</option>
+          <option value="زبان انگلیسی">انگلیسی (۹۱۰)</option>
+          <option value="مطالعات اجتماعی">مطالعات اجتماعی (۹۰۷)</option>
+          <option value="پیام های آسمان">پیام‌های آسمان (۹۰۲)</option>
+          <option value="قرآن">قرآن (۹۰۱)</option>
+          <option value="کار و فناوری">کار و فناوری (۹۱۷)</option>
+          <option value="فرهنگ و هنر">فرهنگ و هنر (۹۰۸)</option>
+        </select>
+        <input type="text" id="askInput" placeholder="مثلاً: فصل اول علوم — حرکت چیست؟" maxlength="220">
+        <button class="rem-add-btn" onclick="askOnline()">🔍 پاسخ طبق کتاب درسی + گوگل</button>
+      </div>
+      <div class="ask-chips">
+        <button type="button" class="ask-chip" onclick="askPreset('حرکت و نیرو کتاب علوم نهم')">حرکت و نیرو</button>
+        <button type="button" class="ask-chip" onclick="askPreset('معادله درجه دوم ریاضی نهم')">معادله درجه ۲</button>
+        <button type="button" class="ask-chip" onclick="askPreset('آرایه‌های ادبی فارسی نهم')">آرایه ادبی</button>
+        <button type="button" class="ask-chip" onclick="askPreset('هدایت تحصیلی رشته تجربی نهم')">هدایت تجربی</button>
+        <button type="button" class="ask-chip" onclick="askPreset('آزمون ورودی نمونه دولتی نهم')">نمونه دولتی</button>
+      </div>
+      <div class="ask-result" id="askResult">
+        <div class="ask-loading" id="askLoading">در حال دریافت پاسخ…</div>
+        <h4 id="askTitle"></h4>
+        <div class="ask-body" id="askBody"></div>
+        <div class="ask-links" id="askLinks"></div>
+      </div>
+    </div>
+
+    <div class="section-title">📚 کتاب‌های رسمی نهم (PDF · ۱۴۰۵–۱۴۰۶)</div>
+    <div class="card">
+      <div class="save-note" style="margin-top:0;margin-bottom:10px;">منبع رسمی آموزش و پرورش: <b>chap.sch.ir</b> — برای دانلود PDF روی هر کتاب بزن.</div>
+      <div id="textbookList" class="textbook-list"></div>
+      <a class="rem-add-btn" style="display:block;text-align:center;text-decoration:none;margin-top:12px;" href="http://www.chap.sch.ir/category/%D8%AF%D9%88%D8%B1%D9%87/%D8%AF%D9%88%D8%B1%D9%87-%D8%A7%D9%88%D9%84-%D9%85%D8%AA%D9%88%D8%B3%D8%B7%D9%87-%D8%AC%D8%AF%DB%8C%D8%AF/%D9%BE%D8%A7%DB%8C%D9%87-%D9%86%D9%87%D9%85" target="_blank" rel="noopener">📂 فهرست کامل پایه نهم در سایت رسمی</a>
+    </div>
+
+    <div class="section-title">⏱ تایمر مطالعه</div>
+    <div class="card timer-card">
+      <div class="timer-display" id="timerDisplay">۲۵:۰۰</div>
+      <div class="timer-presets" id="timerPresets"></div>
+      <div class="timer-btns">
+        <button class="timer-btn primary" id="timerToggleBtn" onclick="timerToggle()">▶ شروع</button>
+        <button class="timer-btn" onclick="timerReset()">↺ ریست</button>
+      </div>
+      <div class="save-note" style="margin-top:10px;">یک بازه زمانی برای مطالعه بدون حواس‌پرتی انتخاب کن. با اتمام تایمر، دقایق مطالعه در بخش پیشرفت ثبت می‌شود.</div>
+    </div>
+
+    <div class="section-title">📝 امتحانات پیش رو</div>
+    <div class="card">
+      <div class="mini-form">
+        <select id="examBookSel"></select>
+        <input type="date" id="examDateInp">
+        <input type="text" id="examNoteInp" placeholder="یادداشت (اختیاری) — مثلاً: فصل ۳ تا ۵">
+        <button class="rem-add-btn" onclick="addExam()">➕ افزودن امتحان</button>
+      </div>
+      <div id="examList" style="margin-top:12px;"></div>
+    </div>
+
+    <div class="section-title">✅ کارهای متفرقه</div>
+    <div class="card">
+      <div class="mini-form">
+        <input type="text" id="todoTextInp" placeholder="مثلاً: خرید ماژیک برای پروژه هنر">
+        <button class="rem-add-btn" onclick="addTodo()">➕ افزودن کار</button>
+      </div>
+      <div id="todoList" style="margin-top:12px;"></div>
+    </div>
+
+    <div class="section-title">🎯 کارنامه (نمرات)</div>
+    <div class="card">
+      <div class="mini-form">
+        <select id="gradeBookSel"></select>
+        <input type="number" id="gradeScoreInp" placeholder="نمره از ۲۰" min="0" max="20" step="0.25">
+        <button class="rem-add-btn" onclick="addGrade()">➕ ثبت نمره</button>
+      </div>
+      <div id="gradeList" style="margin-top:12px;"></div>
+    </div>
+
+    <div class="section-title">🎓 هدف و مسیر (تجربی · نمونه دولتی)</div>
+    <div class="card">
+      <div class="mini-form">
+        <input type="text" id="goalFieldInp" placeholder="رشته هدف — مثلاً: تجربی">
+        <input type="text" id="goalTargetInp" placeholder="هدف نهایی — مثلاً: نمونه دولتی">
+        <input type="number" id="goalAvgInp" placeholder="معدل هدف از ۲۰" min="10" max="20" step="0.25">
+        <input type="number" id="goalStudyInp" placeholder="دقیقه مطالعه هفتگی هدف" min="60" max="2000" step="30">
+        <input type="text" id="goalNoteInp" placeholder="یادداشت شخصی هدف">
+        <button class="rem-add-btn" onclick="saveGoalSettings()">💾 ذخیره هدف</button>
+      </div>
+      <div class="save-note">این تنظیمات روی کارت هدف صفحهٔ «امروز» و محاسبهٔ آمادگی مسیر اثر می‌گذارد.</div>
+    </div>
+
+    <div class="section-title">✅ چک‌لیست مسیر نهم</div>
+    <div class="card">
+      <div id="milestoneList"></div>
+      <div class="save-note">مراحل مهم تعیین رشته و آمادگی نمونه دولتی را اینجا تیک بزن.</div>
+    </div>
+
+    <div class="section-title">📌 راهنمای دروس کلیدی تجربی</div>
+    <div class="card" id="priorityGuideCard">
+      <div id="priorityGuide"></div>
+    </div>
+
+  </section>
+
+  <!-- AI CHAT — فقط Grok (xAI) · منبع: کتاب درسی نهم -->
+  <section class="screen" id="screen-ai">
+    <div class="section-title" style="display:flex;align-items:center;gap:8px;">
+      <button class="icon-btn" style="background:var(--ivory-2);border:1px solid var(--line);color:var(--royal-purple);width:32px;height:32px;font-size:14px;" onclick="goScreen('more')" title="بازگشت">›</button>
+      <span>🤖 چت با Grok · کتاب نهم</span>
+    </div>
+    <div class="card">
+      <div class="save-note" style="margin-top:0;margin-bottom:8px;">فقط به <b>Grok (xAI)</b> وصل می‌شود. پاسخ باید مطابق سطح و محتوای کتاب‌های رسمی پایه نهم باشد. کلید فقط روی همین دستگاه ذخیره می‌شود.</div>
+      <div class="ai-settings open" id="aiSettingsBox">
+        <label class="ai-label">کلید API مربوط به xAI (Grok)</label>
+        <input type="password" id="aiApiKey" placeholder="xai-... را اینجا بچسبان" autocomplete="off">
+        <button type="button" class="rem-add-btn" onclick="saveAiSettings()">💾 ذخیره کلید</button>
+        <div class="save-note" style="margin-top:8px;">کلید را از <a href="https://console.x.ai/" target="_blank" rel="noopener">console.x.ai</a> بگیر. در GitHub کلید را commit نکن.</div>
+      </div>
+    </div>
+
+    <div class="card ai-chat-card">
+      <div class="ai-messages" id="aiMessages"></div>
+      <div class="ai-input-row">
+        <textarea id="aiInput" rows="2" placeholder="سؤال از روی کتاب نهم… مثلاً: تعریف مجموعه در فصل اول ریاضی چیست؟"></textarea>
+        <button type="button" class="rem-add-btn" id="aiSendBtn" onclick="sendAiMessage()">ارسال</button>
+      </div>
+      <div class="ai-quick">
+        <button type="button" class="ask-chip" onclick="aiQuick('طبق کتاب ریاضی نهم، مجموعه را تعریف کن و یک مثال بزن')">ریاضی · مجموعه</button>
+        <button type="button" class="ask-chip" onclick="aiQuick('طبق کتاب علوم نهم، حرکت را توضیح بده')">علوم · حرکت</button>
+        <button type="button" class="ask-chip" onclick="aiQuick('برای قبولی نمونه دولتی تجربی از روی کتاب‌های نهم چه برنامه‌ای پیشنهاد می‌کنی؟')">نمونه دولتی</button>
+        <button type="button" class="ask-chip" onclick="clearAiChat()">پاک کردن گفتگو</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="app-footer" aria-label="پانوشت">
+  <div class="footer-motto">پلنر دانش‌آموزی · پایه نهم · مسیر تجربی و نمونه دولتی</div>
+  <div class="footer-rule"></div>
+  <div class="footer-meta">ساخته‌شده برای یک سال تحصیلی موفق ✦</div>
+</footer>
+
+<nav class="bottom">
+  <button class="active" data-s="today" onclick="goScreen('today')"><span class="ic">🏛</span>امروز</button>
+  <button data-s="calendar" onclick="goScreen('calendar')"><span class="ic">📅</span>تقویم</button>
+  <button data-s="setup" onclick="goScreen('setup')"><span class="ic">🗂</span>برنامه</button>
+  <button data-s="progress" onclick="goScreen('progress')"><span class="ic">🏆</span>پیشرفت</button>
+  <button data-s="more" onclick="goScreen('more')"><span class="ic">✨</span>بیشتر</button>
+</nav>
+
+<script>
+/* ---------- Books ---------- */
+/* priority: 3=کلیدی برای تجربی+نمونه، 2=مهم، 1=عادی */
+const BOOKS = [
+  {id:'farsi', name:'فارسی', icon:'📗', color:'#C45C26', priority:3, tip:'درک مطلب و املا برای آزمون ورودی حیاتی است'},
+  {id:'elm', name:'علوم تجربی', icon:'🔬', color:'#2E6B4F', priority:3, tip:'پایهٔ اصلی رشته تجربی — هر فصل را عمیق بخوان'},
+  {id:'riazi', name:'ریاضی', icon:'📐', color:'#2F5D8C', priority:3, tip:'هر روز حداقل یک صفحه تمرین؛ پایه ریاضی نهم در ورودی مهم است'},
+  {id:'english', name:'زبان انگلیسی', icon:'🔤', color:'#6B3FA0', priority:2, tip:'واژگان و گرامر را مرور کن'},
+  {id:'arabi', name:'عربی', icon:'📘', color:'#1A6B6B', priority:2, tip:'ترجمه و قواعد را منظم تمرین کن'},
+  {id:'quran', name:'قرآن', icon:'📖', color:'#8B1A1A', priority:1, tip:'روخوانی و پیام آیات'},
+  {id:'dini', name:'تعلیمات دینی', icon:'🕌', color:'#5C4A32', priority:1, tip:'نکات کلیدی هر درس را خلاصه کن'},
+  {id:'negaresh', name:'نگارش', icon:'✍️', color:'#A05A2C', priority:2, tip:'انشا و نگارش در ارزیابی کلی مؤثر است'},
+  {id:'motaleat', name:'مطالعات اجتماعی', icon:'🌍', color:'#3D5A80', priority:1, tip:'تاریخ و جغرافیا را با نقشه و خط زمانی مرور کن'},
+  {id:'karfanavari', name:'کار و فناوری', icon:'🛠', color:'#4A5568', priority:1, tip:'پروژه‌ها را زودتر شروع کن'},
+  {id:'honar', name:'فرهنگ و هنر', icon:'🎨', color:'#B83B5E', priority:1, tip:'کار عملی را مرتب تحویل بده'},
+];
+function bookColor(id){
+  const b=BOOKS.find(x=>x.id===id);
+  return b&&b.color ? b.color : '#5C5348';
+}
+function bookById(id){ return BOOKS.find(b=>b.id===id); }
+
+/* هدف سال: تجربی + نمونه دولتی */
+const DEFAULT_GOAL = {
+  field:'تجربی',
+  target:'نمونه دولتی',
+  minAvg:18,
+  weeklyStudyMin:420, // ۷ ساعت در هفته
+  note:'قبولی در دبیرستان نمونه دولتی رشته تجربی'
+};
+const DEFAULT_MILESTONES = [
+  {id:'m1', title:'انتخاب قطعی رشته تجربی', done:false},
+  {id:'m2', title:'ثبت‌نام / آمادگی آزمون ورودی نمونه دولتی', done:false},
+  {id:'m3', title:'معدل پایه تا الان بالای ۱۸', done:false},
+  {id:'m4', title:'تقویت علوم و ریاضی (هفته‌ای حداقل ۴ جلسه)', done:false},
+  {id:'m5', title:'آزمون‌های آزمایشی یا نمونه سؤال ورودی', done:false},
+  {id:'m6', title:'رفع ضعف دروس کلیدی با معلم/جزوه', done:false},
+  {id:'m7', title:'مرور کامل کتاب‌های نهم قبل از امتحانات نهایی', done:false},
+  {id:'m8', title:'آمادگی پرونده و مدارک ثبت‌نام', done:false},
+];
+const WEEKDAYS = ['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
+const WEEKEND_DAYS = [5,6]; // پنجشنبه و جمعه: همیشه تعطیل رسمی هستند
+function isWeekend(wd){ return WEEKEND_DAYS.includes(wd); }
+
+/* ---------- Jalali <-> Gregorian ---------- */
+function div(a,b){return ~~(a/b);}
+function jalCal(jy){
+  const breaks=[-61,9,38,199,426,686,756,818,1111,1181,1210,1635,2060,2097,2192,2262,2324,2394,2456,3178];
+  let bl=breaks.length,gy=jy+621,leapJ=-14,jp=breaks[0],jm,jump,leap,n,i;
+  if(jy<jp||jy>=breaks[bl-1]) return null;
+  for(i=1;i<bl;i+=1){jm=breaks[i];jump=jm-jp;if(jy<jm)break;leapJ+=div(jump,33)*8+div(jump%33,4);jp=jm;}
+  n=jy-jp;
+  leapJ+=div(n,33)*8+div((n%33)+3,4);
+  if((jump%33)===4 && jump-n===4) leapJ+=1;
+  const leapG=div(gy,4)-div((div(gy,100)+1)*3,4)-150;
+  const march=20+leapJ-leapG;
+  if(jump-n<6) n=n-jump+div(jump+4,33)*33;
+  leap=(((n+1)%33)-1)%4;
+  if(leap===-1) leap=4;
+  return {leap:leap,gy:gy,march:march};
+}
+function isLeapJ(jy){return jalCal(jy).leap===0;}
+function g2d(gy,gm,gd){
+  let d=div((gy+div(gm-8,6)+100100)*1461,4)+div(153*((gm+9)%12)+2,5)+gd-34840408;
+  d=d-div(div(gy+100100+div(gm-8,6),100)*3,4)+752;
+  return d;
+}
+function d2g(jdn){
+  let j=4*jdn+139361631;
+  j=j+div(div(4*jdn+183187720,146097)*3,4)*4-3908;
+  const i=div((j%1461),4)*5+308;
+  const gd=div(i%153,5)+1;
+  const gm=(div(i,153)%12)+1;
+  const gy=div(j,1461)-100100+div(8-gm,6);
+  return {gy,gm,gd};
+}
+function toJalali(gy,gm,gd){
+  const jdn=g2d(gy,gm,gd);
+  let jy=jdn>=g2d(gy,3,21)?gy-621:gy-622; // guess, refine below
+  // proper algorithm:
+  const gy2 = (gm>2)?gy:gy-1;
+  jy = gy2-621;
+  let r=jalCal(jy+1);
+  let jdn1f = g2d(r.gy,3,r.march);
+  let k=jdn-jdn1f;
+  if(k>=0){
+    if(k<=185){return {jy:jy+1, jm:1+div(k,31), jd:(k%31)+1};}
+    else{k-=186;}
+  } else {
+    r=jalCal(jy);
+    jdn1f=g2d(r.gy,3,r.march);
+    k=jdn-jdn1f;
+    if(k<0){r=jalCal(jy-1);jdn1f=g2d(r.gy,3,r.march);k=jdn-jdn1f;jy--;}
+    if(k<=185){return {jy:jy, jm:1+div(k,31), jd:(k%31)+1};}
+    k-=186;
+  }
+  return {jy:jy+1, jm:7+div(k,30), jd:(k%30)+1};
+}
+function toGregorian(jy,jm,jd){
+  const r=jalCal(jy);
+  const jdn=g2d(r.gy,3,r.march)+(jm-1)*31-(jm>6?(jm-7)*1:0);
+  // more reliable: compute day-of-year then convert
+  let doy = jm<=6 ? (jm-1)*31+jd : 186+(jm-7)*30+jd;
+  const jdn2 = g2d(r.gy,3,r.march)+doy-1;
+  return d2g(jdn2);
+}
+function jMonthLen(jy,jm){
+  if(jm<=6) return 31;
+  if(jm<=11) return 30;
+  return isLeapJ(jy)?30:29;
+}
+const JMONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+
+function todayJalali(){
+  const now=new Date();
+  return toJalali(now.getFullYear(), now.getMonth()+1, now.getDate());
+}
+function jWeekday(jy,jm,jd){
+  const g=toGregorian(jy,jm,jd);
+  const dt=new Date(g.gy,g.gm-1,g.gd);
+  const dow=dt.getDay(); // 0=Sun..6=Sat
+  // map to Iranian week: Sat=0 ... Fri=6
+  return (dow+1)%7;
+}
+function pad2(n){return n<10?'0'+n:''+n;}
+function dateKey(jy,jm,jd){return `${jy}-${pad2(jm)}-${pad2(jd)}`;}
+function toFaDigits(str){
+  const fa=['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+  return String(str).replace(/[0-9]/g,d=>fa[d]);
+}
+
+/* ---------- Storage helpers ----------
+   Uses the browser's own localStorage (persists on the phone/computer
+   that opens the page). This works fully offline and on any static
+   host like GitHub Pages — nothing is sent to any server. */
+const LS_PREFIX = 'planner-man:';
+const LEGACY_PREFIX = 'planner-shahaneh:';
+async function migrateLegacyStorage(){
+  try{
+    const migrated=localStorage.getItem(LS_PREFIX+'__migrated');
+    if(migrated) return;
+    const legacy=[];
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      if(k && k.indexOf(LEGACY_PREFIX)===0) legacy.push(k);
+    }
+    legacy.forEach(k=>{
+      const nk=LS_PREFIX+k.slice(LEGACY_PREFIX.length);
+      if(localStorage.getItem(nk)===null) localStorage.setItem(nk,localStorage.getItem(k));
+    });
+    localStorage.setItem(LS_PREFIX+'__migrated','1');
+  }catch(e){}
+}
+async function sGet(key){
+  try{
+    const raw = localStorage.getItem(LS_PREFIX+key);
+    return raw!==null ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
+async function sSet(key,val){
+  try{ localStorage.setItem(LS_PREFIX+key, JSON.stringify(val)); }catch(e){}
+}
+async function sDelete(key){
+  try{ localStorage.removeItem(LS_PREFIX+key); }catch(e){}
+}
+async function sListKeys(){
+  const keys=[];
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k && k.indexOf(LS_PREFIX)===0) keys.push(k.slice(LS_PREFIX.length));
+  }
+  return keys;
+}
+
+/* ---------- Theme (dark/light) ---------- */
+function applyTheme(t){
+  if(t==='dark') document.body.setAttribute('data-theme','dark');
+  else document.body.removeAttribute('data-theme');
+  const btn=document.getElementById('themeBtn');
+  if(btn) btn.textContent = t==='dark' ? '☀️' : '🌙';
+}
+async function toggleTheme(){
+  const cur = document.body.getAttribute('data-theme')==='dark' ? 'dark':'light';
+  const next = cur==='dark' ? 'light':'dark';
+  applyTheme(next);
+  await sSet('theme', next);
+}
+(async function initThemeEarly(){
+  const saved = await sGet('theme');
+  applyTheme(saved || 'light');
+})();
+
+/* ---------- State ---------- */
+let schedule = {}; // weekday(0-6) -> [bookIds]
+let todayJ = todayJalali();
+let calViewY = todayJ.jy, calViewM = todayJ.jm;
+let selectedCalDate = null;
+let currentDayStatus = {}; // {holidayOverride, tasks:{bookId:{has,done}}}
+let monthHolidayMap = {}; // dateKey -> {isHoliday, event}
+let officialLiveOk = false;
+let reminders = []; // [{id,hour,minute,message}]
+let editingReminderId = null;
+let reminderQueue = []; // ids currently due & unseen, waiting to be shown
+let activeReminderId = null;
+let reminderTimer = null;
+
+/* ---------- Profile ---------- */
+async function loadProfile(){
+  const p=(await sGet('profile'))||{name:'نام من',bio:'پایه نهم · تجربی · هدف: نمونه دولتی'};
+  document.getElementById('profileName').textContent=p.name||'نام من';
+  document.getElementById('profileBio').textContent=p.bio||'پایه نهم · تجربی · هدف: نمونه دولتی';
+}
+function openProfileModal(){
+  const name=document.getElementById('profileName').textContent;
+  const bio=document.getElementById('profileBio').textContent;
+  document.getElementById('profileNameInp').value=name==='نام من'?'':name;
+  document.getElementById('profileBioInp').value=(bio==='پایه نهم · تجربی · هدف: نمونه دولتی'||bio==='پروفایل پلنر من · پایه نهم')?'':bio;
+  document.getElementById('profileModal').classList.add('open');
+}
+function closeProfileModal(){document.getElementById('profileModal').classList.remove('open');}
+async function saveProfile(){
+  const name=document.getElementById('profileNameInp').value.trim()||'نام من';
+  const bio=document.getElementById('profileBioInp').value.trim()||'پایه نهم · تجربی · هدف: نمونه دولتی';
+  await sSet('profile',{name,bio});
+  await loadProfile(); closeProfileModal(); showToast('پروفایل ذخیره شد ✓');
+}
+
+/* ---------- Goal / milestones / readiness (تجربی + نمونه دولتی) ---------- */
+async function loadGoal(){
+  return Object.assign({}, DEFAULT_GOAL, (await sGet('goal'))||{});
+}
+async function loadMilestones(){
+  const saved = await sGet('milestones');
+  if(!saved || !Array.isArray(saved) || saved.length===0) return DEFAULT_MILESTONES.map(m=>({...m}));
+  // merge with defaults so new milestones appear
+  const map={}; saved.forEach(m=>{map[m.id]=m;});
+  return DEFAULT_MILESTONES.map(d=>({...d, done: !!(map[d.id]&&map[d.id].done)}));
+}
+async function saveMilestones(list){ await sSet('milestones', list); }
+
+async function computeReadiness(){
+  const goal = await loadGoal();
+  const milestones = await loadMilestones();
+  const grades = (await sGet('grades'))||[];
+  const studyMin = await loadStudyMinutes();
+
+  // 1) milestone completion 0-35
+  const msDone = milestones.filter(m=>m.done).length;
+  const msScore = milestones.length? (msDone/milestones.length)*35 : 0;
+
+  // 2) grade average vs target 0-40 (key subjects weighted)
+  let gScore = 10; // baseline if no grades
+  if(grades.length){
+    const by={};
+    grades.forEach(g=>{ if(!by[g.bookId]) by[g.bookId]=[]; by[g.bookId].push(Number(g.score)); });
+    let wSum=0, wTot=0;
+    BOOKS.forEach(b=>{
+      if(!by[b.id]||!by[b.id].length) return;
+      const avg=by[b.id].reduce((s,x)=>s+x,0)/by[b.id].length;
+      const w=b.priority||1;
+      wSum+=avg*w; wTot+=w;
+    });
+    if(wTot>0){
+      const wAvg=wSum/wTot;
+      const target=goal.minAvg||18;
+      gScore = Math.max(0, Math.min(40, (wAvg/target)*40));
+    }
+  }
+
+  // 3) study minutes last 30d vs weekly goal *4 0-15
+  const weeklyTarget=(goal.weeklyStudyMin||420);
+  const monthTarget=weeklyTarget*4;
+  const stScore = Math.max(0, Math.min(15, (studyMin/Math.max(1,monthTarget))*15));
+
+  // 4) homework completion last 7 days 0-10
+  let rel=0,done=0;
+  for(let i=0;i<7;i++){
+    const g=new Date(); g.setDate(g.getDate()-i);
+    const j=toJalali(g.getFullYear(),g.getMonth()+1,g.getDate());
+    const st=await sGet('day:'+dateKey(j.jy,j.jm,j.jd));
+    if(!st||st.holidayOverride===true) continue;
+    Object.keys(st.tasks||{}).forEach(id=>{
+      const t=st.tasks[id];
+      if(t&&t.has===true){rel++; if(t.done) done++;}
+    });
+  }
+  const hwScore = rel? (done/rel)*10 : 5;
+
+  const total = Math.round(msScore+gScore+stScore+hwScore);
+  return Math.max(0, Math.min(100, total));
+}
+
+async function findWeakSubjects(){
+  const grades=(await sGet('grades'))||[];
+  const by={};
+  grades.forEach(g=>{ if(!by[g.bookId]) by[g.bookId]=[]; by[g.bookId].push(Number(g.score)); });
+  const weak=[];
+  BOOKS.filter(b=>b.priority>=2).forEach(b=>{
+    if(by[b.id]&&by[b.id].length){
+      const avg=by[b.id].reduce((s,x)=>s+x,0)/by[b.id].length;
+      if(avg<16) weak.push({book:b, avg});
+    } else {
+      weak.push({book:b, avg:null}); // no grade yet for key subject
+    }
+  });
+  // also check incomplete homework rate for key books last 14d
+  const incomplete={};
+  for(let i=0;i<14;i++){
+    const g=new Date(); g.setDate(g.getDate()-i);
+    const j=toJalali(g.getFullYear(),g.getMonth()+1,g.getDate());
+    const st=await sGet('day:'+dateKey(j.jy,j.jm,j.jd));
+    if(!st||st.holidayOverride===true) continue;
+    Object.keys(st.tasks||{}).forEach(id=>{
+      const t=st.tasks[id];
+      if(t&&t.has===true&&!t.done){ incomplete[id]=(incomplete[id]||0)+1; }
+    });
+  }
+  return {weak, incomplete};
+}
+
+async function renderGoalCard(){
+  const goal=await loadGoal();
+  const el=document.getElementById('goalTitleText');
+  if(el) el.textContent = `رشته ${goal.field} → ${goal.target}`;
+  const sub=document.getElementById('goalSubText');
+  if(sub) sub.textContent = goal.note || 'تمرکز روی دروس کلیدی تجربی و معدل هدف.';
+  const fc=document.getElementById('goalFieldChip'); if(fc) fc.textContent=goal.field;
+  const tc=document.getElementById('goalTargetChip'); if(tc) tc.textContent=goal.target;
+  const ac=document.getElementById('goalAvgChip'); if(ac) ac.textContent=toFaDigits(goal.minAvg);
+
+  const ready=await computeReadiness();
+  const bar=document.getElementById('readinessBar');
+  const lbl=document.getElementById('readinessPctLabel');
+  if(bar) bar.style.width=ready+'%';
+  if(lbl) lbl.textContent=toFaDigits(ready)+'٪';
+
+  // focus text
+  const focus=document.getElementById('focusText');
+  if(focus){
+    const {weak, incomplete}=await findWeakSubjects();
+    const tips=[];
+    const topIncomplete=Object.entries(incomplete).sort((a,b)=>b[1]-a[1])[0];
+    if(topIncomplete){
+      const bk=bookById(topIncomplete[0]);
+      if(bk) tips.push(`تکالیف ${bk.name} عقب افتاده — امروز اولویت بده.`);
+    }
+    const lowGrade=weak.filter(w=>w.avg!==null).sort((a,b)=>a.avg-b.avg)[0];
+    if(lowGrade) tips.push(`${lowGrade.book.name} با میانگین ${toFaDigits(Math.round(lowGrade.avg*10)/10)} نیاز به تقویت دارد. ${lowGrade.book.tip||''}`);
+    const noGrade=weak.find(w=>w.avg===null && w.book.priority===3);
+    if(noGrade && tips.length<2) tips.push(`هنوز نمره‌ای برای ${noGrade.book.name} ثبت نکرده‌ای — یکی از دروس کلیدی تجربی است.`);
+    if(tips.length===0){
+      const key=BOOKS.filter(b=>b.priority===3);
+      const pick=key[new Date().getDay()%key.length];
+      tips.push(`امروز روی ${pick.name} تمرکز کن. ${pick.tip}`);
+    }
+    focus.textContent=tips[0];
+  }
+}
+
+async function renderGoalForm(){
+  const goal=await loadGoal();
+  const f=document.getElementById('goalFieldInp');
+  const t=document.getElementById('goalTargetInp');
+  const a=document.getElementById('goalAvgInp');
+  const s=document.getElementById('goalStudyInp');
+  const n=document.getElementById('goalNoteInp');
+  if(f) f.value=goal.field||'';
+  if(t) t.value=goal.target||'';
+  if(a) a.value=goal.minAvg||18;
+  if(s) s.value=goal.weeklyStudyMin||420;
+  if(n) n.value=goal.note||'';
+}
+
+async function saveGoalSettings(){
+  const field=(document.getElementById('goalFieldInp').value.trim())||'تجربی';
+  const target=(document.getElementById('goalTargetInp').value.trim())||'نمونه دولتی';
+  let minAvg=parseFloat(document.getElementById('goalAvgInp').value);
+  if(isNaN(minAvg)||minAvg<10||minAvg>20) minAvg=18;
+  let weeklyStudyMin=parseInt(document.getElementById('goalStudyInp').value,10);
+  if(isNaN(weeklyStudyMin)||weeklyStudyMin<60) weeklyStudyMin=420;
+  const note=document.getElementById('goalNoteInp').value.trim()||DEFAULT_GOAL.note;
+  await sSet('goal',{field,target,minAvg,weeklyStudyMin,note});
+  await renderGoalCard();
+  showToast('هدف ذخیره شد ✓');
+}
+
+async function renderMilestones(){
+  const list=document.getElementById('milestoneList');
+  if(!list) return;
+  const items=await loadMilestones();
+  list.innerHTML='';
+  items.forEach(m=>{
+    const row=document.createElement('div');
+    row.className='milestone-item'+(m.done?' done':'');
+    row.innerHTML=`
+      <input type="checkbox" ${m.done?'checked':''} onchange="toggleMilestone('${m.id}',this.checked)">
+      <div class="ms-text">${escapeHtml(m.title)}</div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+async function toggleMilestone(id, val){
+  const items=await loadMilestones();
+  const m=items.find(x=>x.id===id);
+  if(m) m.done=val;
+  await saveMilestones(items);
+  await renderMilestones();
+  await renderGoalCard();
+}
+
+function renderPriorityGuide(){
+  const el=document.getElementById('priorityGuide');
+  if(!el) return;
+  el.innerHTML='';
+  [...BOOKS].sort((a,b)=>b.priority-a.priority).forEach(b=>{
+    const tag=b.priority===3?'کلیدی تجربی':(b.priority===2?'مهم':'عادی');
+    const cls=b.priority===3?'p3':(b.priority===2?'p2':'p1');
+    const div=document.createElement('div');
+    div.style.cssText='padding:10px 0;border-bottom:1px dotted var(--line);';
+    div.innerHTML=`
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+        <span style="width:10px;height:10px;background:${b.color};border:1px solid var(--rule);display:inline-block"></span>
+        <strong style="font-size:13.5px">${b.icon} ${b.name}</strong>
+        <span class="priority-tag ${cls}">${tag}</span>
+      </div>
+      <div class="tip-inline">${escapeHtml(b.tip||'')}</div>
+    `;
+    el.appendChild(div);
+  });
+}
+
+/* ---------- Init ---------- */
+async function init(){
+  await migrateLegacyStorage();
+  await loadProfile();
+  schedule = (await sGet('weeklySchedule')) || {};
+  renderHeaderDate();
+  renderDayTabs();
+  renderBookPick();
+  await backfillScheduleDays();
+  await loadTodayFlow();
+  await renderCalendar();
+  renderProgressScreen();
+  await checkMissedItems();
+  await registerPlannerServiceWorker();
+  updateNotificationStatus();
+  if('Notification' in window && Notification.permission==='granted') await notifyMissedItems();
+  initReminderForm();
+  await loadReminders();
+  await checkReminders();
+  if(!reminderTimer) reminderTimer = setInterval(checkReminders, 20000);
+}
+
+/* ---------- Backfill past days against the weekly schedule ----------
+   Whenever the weekly schedule is set/changed (or on every app start),
+   walk backwards over past days and make sure each past school day that
+   the current weekly schedule assigns books to actually has a stored
+   day-state with those books queued up (has:null = "not answered yet").
+   This is what lets the app ask about — and keep showing — homework
+   from earlier days, not just today. */
+async function backfillScheduleDays(daysBack){
+  daysBack = daysBack || 45;
+  for(let i=1;i<=daysBack;i++){
+    const g = new Date();
+    g.setDate(g.getDate()-i);
+    const j = toJalali(g.getFullYear(), g.getMonth()+1, g.getDate());
+    const wd = jWeekday(j.jy,j.jm,j.jd);
+    const key = dateKey(j.jy,j.jm,j.jd);
+    let st = await sGet('day:'+key);
+    if(isWeekend(wd)){
+      if(!st) await sSet('day:'+key, {holidayOverride:true, weekend:true, liveChecked:key, liveOk:true, tasks:{}});
+      continue;
+    }
+    const dayBooks = schedule[wd] || [];
+    if(dayBooks.length===0) continue;
+    let changed=false;
+    if(!st){ st={holidayOverride:null, liveChecked:null, liveOk:false, tasks:{}}; changed=true; }
+    if(!st.tasks) st.tasks={};
+    dayBooks.forEach(id=>{
+      if(!st.tasks[id]){ st.tasks[id]={has:null,done:false,note:''}; changed=true; }
+    });
+    if(changed) await sSet('day:'+key, st);
+  }
+}
+
+/* Generic day-state read/write, usable for any past day (not just today) */
+async function getDayStatus(key){
+  let st = await sGet('day:'+key);
+  if(!st) st = {holidayOverride:null, tasks:{}};
+  if(!st.tasks) st.tasks={};
+  return st;
+}
+async function setDayStatus(key, st){ await sSet('day:'+key, st); }
+
+async function refreshAllProgress(){
+  await checkMissedItems();
+  await renderProgressScreen();
+  await renderGoalCard();
+  const todayKey = dateKey(todayJ.jy,todayJ.jm,todayJ.jd);
+  currentDayStatus = await sGet('day:'+todayKey) || currentDayStatus;
+  renderTodayProgress();
+}
+
+async function setHolidayFor(key,val){
+  const st = await getDayStatus(key);
+  st.holidayOverride = val;
+  await setDayStatus(key, st);
+  const todayKey = dateKey(todayJ.jy,todayJ.jm,todayJ.jd);
+  if(key===todayKey){ currentDayStatus=st; renderHolidaySeg(); renderBooksArea(); }
+  renderCalendar();
+  await refreshAllProgress();
+}
+async function setHasFor(key,id,val){
+  const st = await getDayStatus(key);
+  st.tasks[id] = st.tasks[id]||{note:''};
+  st.tasks[id].has = val;
+  if(!val) st.tasks[id].done = false;
+  await setDayStatus(key, st);
+  const todayKey = dateKey(todayJ.jy,todayJ.jm,todayJ.jd);
+  if(key===todayKey){ currentDayStatus=st; renderBooksArea(); }
+  await refreshAllProgress();
+}
+async function setDoneFor(key,id,val){
+  const st = await getDayStatus(key);
+  st.tasks[id] = st.tasks[id]||{note:''};
+  st.tasks[id].done = val;
+  await setDayStatus(key, st);
+  const todayKey = dateKey(todayJ.jy,todayJ.jm,todayJ.jd);
+  if(key===todayKey){ currentDayStatus=st; renderBooksArea(); }
+  await refreshAllProgress();
+}
+
+/* ---------- Missed items (past days' unanswered / undone homework) ----------
+   Groups pending items by day so each earlier day can be answered right
+   here — confirm the holiday, say whether there was homework, and check
+   it off — without losing the day. A day stays in this list until every
+   book scheduled for it is either marked "no homework" or done. */
+async function checkMissedItems(){
+  const days = []; // {key, jy,jm,jd, dateLabel, weekday, holidayUnconfirmed, pendingBooks:[{id,has,done}]}
+  for(let i=1;i<=21;i++){
+    const g = new Date();
+    g.setDate(g.getDate()-i);
+    const j = toJalali(g.getFullYear(), g.getMonth()+1, g.getDate());
+    const wd = jWeekday(j.jy,j.jm,j.jd);
+    if(isWeekend(wd)) continue;
+    const dayBooks = schedule[wd] || [];
+    if(dayBooks.length===0) continue;
+    const key = dateKey(j.jy,j.jm,j.jd);
+    const st = await sGet('day:'+key);
+    const dateLabel = `${toFaDigits(j.jd)} ${JMONTHS[j.jm-1]}`;
+    const holidayUnconfirmed = !st || st.holidayOverride===null;
+    let pendingBooks = [];
+    if(st && st.holidayOverride===false){
+      dayBooks.forEach(id=>{
+        const t = st.tasks ? st.tasks[id] : null;
+        if(!t || t.has===null) pendingBooks.push({id, has:null});
+        else if(t.has===true && !t.done) pendingBooks.push({id, has:true});
+      });
+    }
+    if(holidayUnconfirmed || pendingBooks.length>0){
+      days.push({key, jy:j.jy, jm:j.jm, jd:j.jd, dateLabel, weekday:WEEKDAYS[wd], holidayUnconfirmed, pendingBooks});
+    }
+    if(days.length>=10) break;
+  }
+  renderMissedBanner(days);
+  return days;
+}
+
+function renderMissedBanner(days){
+  const card=document.getElementById('missedCard');
+  const list=document.getElementById('missedList');
+  if(days.length===0){card.style.display='none';list.innerHTML='';return;}
+  card.style.display='block';
+  list.innerHTML='';
+  days.forEach(d=>{
+    const wrap=document.createElement('div');
+    wrap.className='missed-day';
+    let html = `<div class="missed-day-hd"><span>${d.weekday} · ${d.dateLabel}</span></div>`;
+    if(d.holidayUnconfirmed){
+      html += `<div class="mi-text" style="margin-bottom:6px;">آیا آن روز تعطیل رسمی بود؟</div>
+        <div class="seg">
+          <button onclick="setHolidayFor('${d.key}',false)">خیر، روز عادی بود</button>
+          <button class="holiday" onclick="setHolidayFor('${d.key}',true)">بله تعطیل بود</button>
+        </div>`;
+    }
+    d.pendingBooks.forEach(pb=>{
+      const bk=bookById(pb.id);
+      if(!bk) return;
+      if(pb.has===null){
+        html += `<div class="missed-item" style="border-right-color:${bk.color}">
+          <div class="mi-text">${bk.icon} ${bk.name}<div class="mi-date">تکلیف داشتی؟</div></div>
+          <button onclick="setHasFor('${d.key}','${pb.id}',true)">بله دارم</button>
+          <button class="secondary" onclick="setHasFor('${d.key}','${pb.id}',false)">نه ندارم</button>
+        </div>`;
+      } else {
+        html += `<div class="missed-item" style="border-right-color:${bk.color}">
+          <div class="mi-text">${bk.icon} ${bk.name}<div class="mi-date">تکلیف دارد — هنوز انجام نشده</div></div>
+          <button onclick="setDoneFor('${d.key}','${pb.id}',true)">انجام شد</button>
+        </div>`;
+      }
+    });
+    wrap.innerHTML = html;
+    list.appendChild(wrap);
+  });
+}
+
+/* ---------- System notifications ---------- */
+let plannerSWRegistration = null;
+
+async function registerPlannerServiceWorker(){
+  if(!('serviceWorker' in navigator) || !window.isSecureContext) return null;
+  try{
+    plannerSWRegistration = await navigator.serviceWorker.register('./sw.js', {scope:'./'});
+    await navigator.serviceWorker.ready;
+    return plannerSWRegistration;
+  }catch(e){
+    console.warn('Service worker registration failed', e);
+    return null;
+  }
+}
+
+async function enableNotifications(){
+  if(!('Notification' in window)){
+    showToast('این مرورگر اعلان سیستمی را پشتیبانی نمی‌کند');
+    updateNotificationStatus();
+    return false;
+  }
+  if(!window.isSecureContext){
+    showToast('اعلان فقط روی HTTPS یا localhost فعال می‌شود');
+    updateNotificationStatus();
+    return false;
+  }
+  try{
+    const permission = await Notification.requestPermission();
+    updateNotificationStatus();
+    if(permission !== 'granted'){
+      showToast(permission === 'denied' ? 'اعلان‌ها مسدود شده‌اند' : 'اجازه اعلان داده نشد');
+      return false;
+    }
+    await registerPlannerServiceWorker();
+    const ok=await showSystemNotification('پلنر من', 'اعلان‌های پلنر فعال شد ✓', {
+      tag:'planner-enabled', requireInteraction:false, vibrate:[200,100,200]
+    });
+    showToast(ok ? 'اعلان‌ها با موفقیت فعال شدند ✓' : 'اجازه داده شد، اما ارسال اعلان ناموفق بود');
+    return ok;
+  }catch(e){
+    console.warn(e);
+    showToast('فعال‌سازی اعلان ناموفق بود');
+    return false;
+  }
+}
+
+async function showSystemNotification(title, body, extra={}){
+  if(!('Notification' in window) || Notification.permission!=='granted') return false;
+  try{
+    const reg = plannerSWRegistration || await navigator.serviceWorker.ready;
+    if(!reg) return false;
+    await reg.showNotification(title, {
+      body:String(body || ''),
+      lang:'fa-IR',
+      dir:'rtl',
+      icon:'./icon-192.png',
+      badge:'./icon-192.png',
+      vibrate:[250,100,250,100,350],
+      renotify:true,
+      requireInteraction:true,
+      timestamp:Date.now(),
+      data:{url:'./', ...(extra.data||{})},
+      ...extra
+    });
+    return true;
+  }catch(e){
+    console.warn('showNotification failed',e);
+    return false;
+  }
+}
+
+async function testNotification(){
+  if(!('Notification' in window)){
+    showToast('این مرورگر اعلان را پشتیبانی نمی‌کند'); return;
+  }
+  if(Notification.permission!=='granted'){
+    const ok=await enableNotifications();
+    if(!ok) return;
+  }
+  const ok=await showSystemNotification(
+    '⏰ پلنر من',
+    'این یک اعلان آزمایشی است. متن کامل پیام باید در نوار اعلان دیده شود.',
+    {tag:'planner-test', requireInteraction:true, vibrate:[300,100,300,100,500]}
+  );
+  if(ok) showToast('اعلان آزمایشی ارسال شد ✓');
+}
+
+function updateNotificationStatus(){
+  const dot=document.getElementById('notifyDot');
+  const txt=document.getElementById('notifyStatus');
+  if(!dot || !txt) return;
+  if(!('Notification' in window)){
+    dot.className='dot fail'; txt.textContent='مرورگر این دستگاه اعلان سیستمی را پشتیبانی نمی‌کند'; return;
+  }
+  if(!window.isSecureContext){
+    dot.className='dot fail'; txt.textContent='برای اعلان، نسخهٔ HTTPS لازم است'; return;
+  }
+  const p=Notification.permission;
+  if(p==='granted'){
+    dot.className='dot ok'; txt.textContent='اعلان‌ها فعال هستند ✓';
+  }else if(p==='denied'){
+    dot.className='dot fail'; txt.textContent='اعلان‌ها مسدود شده‌اند؛ از تنظیمات سایت اجازه بده';
+  }else{
+    dot.className='dot'; txt.textContent='اعلان‌ها هنوز فعال نشده‌اند';
+  }
+}
+
+async function notifyMissedItems(){
+  if(!('Notification' in window) || Notification.permission!=='granted') return;
+  const items = await checkMissedItems();
+  if(items.length===0) return;
+  const todayKey = dateKey(todayJ.jy,todayJ.jm,todayJ.jd);
+  const lastNotified = await sGet('lastNotify');
+  if(lastNotified && lastNotified.date===todayKey) return;
+  const ok=await showSystemNotification(
+    'پلنر من',
+    `${toFaDigits(items.length)} مورد جا مونده داری — بزن ببین کدوماست.`,
+    {tag:'planner-missed', requireInteraction:true, data:{url:'./'}}
+  );
+  if(ok) await sSet('lastNotify',{date:todayKey});
+}
+
+function renderHeaderDate(){
+  const wd = jWeekday(todayJ.jy,todayJ.jm,todayJ.jd);
+  document.getElementById('hdrJDate').textContent =
+    `${toFaDigits(todayJ.jd)} ${JMONTHS[todayJ.jm-1]} ${toFaDigits(todayJ.jy)}`;
+  document.getElementById('hdrWeekday').textContent = WEEKDAYS[wd];
+}
+
+/* ---------- Screen nav ---------- */
+function goScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  document.querySelectorAll('nav.bottom button').forEach(b=>b.classList.toggle('active', b.dataset.s===name));
+  if(name==='progress') renderProgressScreen();
+  if(name==='calendar') renderCalendar();
+  if(name==='today'){ renderGoalCard(); }
+  if(name==='more'){
+    renderExams(); renderTodos(); renderGrades();
+    renderGoalForm(); renderMilestones(); renderPriorityGuide();
+    renderTextbookList();
+  }
+  if(name==='ai'){
+    fillAiSettingsForm();
+    renderAiMessages();
+  }
+}
+
+/* ---------- Weekly schedule editor ---------- */
+let activeTabDay = isWeekend(jWeekday(todayJ.jy,todayJ.jm,todayJ.jd)) ? 0 : jWeekday(todayJ.jy,todayJ.jm,todayJ.jd);
+function renderDayTabs(){
+  const el=document.getElementById('dayTabs');
+  el.innerHTML='';
+  WEEKDAYS.forEach((w,i)=>{
+    const b=document.createElement('button');
+    const holiday = isWeekend(i);
+    b.textContent = holiday ? '🔒 '+w : w;
+    if(holiday) b.classList.add('is-holiday');
+    if(i===activeTabDay) b.classList.add('active');
+    b.onclick=()=>{activeTabDay=i;renderDayTabs();renderBookPick();};
+    el.appendChild(b);
+  });
+}
+function renderBookPick(){
+  const el=document.getElementById('bookPick');
+  el.innerHTML='';
+  if(isWeekend(activeTabDay)){
+    el.innerHTML = `<div class="empty" style="width:100%;padding:14px 4px;">🌙 ${WEEKDAYS[activeTabDay]} طبق تعطیلات رسمی همیشه تعطیله، نیازی به برنامه‌ریزی نداره.</div>`;
+    return;
+  }
+  const dayList = schedule[activeTabDay] || [];
+  BOOKS.forEach(bk=>{
+    const chip=document.createElement('div');
+    chip.className='chip'+(dayList.includes(bk.id)?' active':'');
+    chip.innerHTML=`<span style="width:8px;height:8px;background:${bk.color};display:inline-block;border:1px solid var(--rule)"></span><span>${bk.icon}</span><span>${bk.name}</span>`;
+    if(dayList.includes(bk.id)){
+      chip.style.background = bk.color;
+      chip.style.color = '#fff';
+      chip.style.borderColor = bk.color;
+    }
+    chip.onclick=async ()=>{
+      let list = schedule[activeTabDay] || [];
+      if(list.includes(bk.id)) list=list.filter(x=>x!==bk.id);
+      else list=[...list,bk.id];
+      schedule[activeTabDay]=list;
+      await sSet('weeklySchedule',schedule);
+      renderBookPick();
+      // Re-scan past days against the updated schedule so earlier days for
+      // this same weekday also get asked about, and refresh every stat
+      // that depends on it (missed list, progress ring, readiness).
+      await backfillScheduleDays();
+      if(activeTabDay===jWeekday(todayJ.jy,todayJ.jm,todayJ.jd)) await loadTodayFlow();
+      await refreshAllProgress();
+      await renderCalendar();
+    };
+    el.appendChild(chip);
+  });
+}
+
+/* ---------- Holiday check (live + manual fallback) ---------- */
+/* Live check against a free, no-API-key Jalali calendar service
+   (pnldev.com — data sourced from time.ir, the official Iranian
+   calendar reference). Because such services can lag behind sudden
+   last-minute holiday announcements, the app always still lets you
+   confirm/override manually. */
+async function checkHolidayLive(jy,jm,jd){
+  try{
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), 6000);
+    const res = await fetch(`https://pnldev.com/api/calender?year=${jy}&month=${jm}&day=${jd}`, {signal:ctrl.signal});
+    clearTimeout(t);
+    if(!res.ok) throw new Error('bad status');
+    const data = await res.json();
+    if(!data || data.status!==true || !data.result) throw new Error('bad payload');
+    const r = data.result;
+    const events = Array.isArray(r.event) ? r.event : [];
+    return {ok:true, isHoliday: !!r.holiday, event: events.join('، ')};
+  }catch(e){
+    return {ok:false, isHoliday:null, event:''};
+  }
+}
+
+/* Bulk-load an entire Jalali month of official holidays from the same
+   global/live source, with a per-day cache so we don't re-fetch a month
+   we've already resolved. Falls back gracefully if the network call fails
+   (offline, blocked, etc.) — weekends still show correctly either way. */
+async function loadMonthHolidays(jy,jm){
+  const len = jMonthLen(jy,jm);
+  const cacheKey = `holidayCache:${jy}-${pad2(jm)}`;
+  let cache = await sGet(cacheKey);
+  let anyOk = false;
+  if(!cache){
+    cache = {};
+    const days = [];
+    for(let d=1; d<=len; d++) days.push(d);
+    const results = await Promise.all(days.map(d=>checkHolidayLive(jy,jm,d)));
+    results.forEach((r,idx)=>{
+      const d=idx+1;
+      const key=dateKey(jy,jm,d);
+      if(r.ok){ anyOk = true; cache[key] = {isHoliday:r.isHoliday, event:r.event}; }
+    });
+    if(anyOk){ await sSet(cacheKey, cache); }
+  } else {
+    anyOk = true;
+  }
+  monthHolidayMap = cache || {};
+  officialLiveOk = anyOk;
+  const dot=document.getElementById('calApiDot'), txt=document.getElementById('calApiTxt');
+  if(dot){
+    if(anyOk){dot.className='dot ok';txt.textContent='تقویم رسمی ایران متصل شد ✓';}
+    else{dot.className='dot fail';txt.textContent='عدم دسترسی به تقویم رسمی — فقط پنجشنبه/جمعه و موارد دستی نمایش داده می‌شود';}
+  }
+}
+
+/* ---------- Today flow ---------- */
+async function loadTodayFlow(force){
+  const key = dateKey(todayJ.jy,todayJ.jm,todayJ.jd);
+  const wd = jWeekday(todayJ.jy,todayJ.jm,todayJ.jd);
+  const askRow=document.getElementById('holidayAskRow');
+  const apiRow=document.getElementById('apiNoteRow');
+  const weekendNotice=document.getElementById('weekendNotice');
+
+  if(isWeekend(wd)){
+    askRow.style.display='none';
+    apiRow.style.display='none';
+    weekendNotice.style.display='block';
+    let status = await sGet('day:'+key);
+    if(!status || status.holidayOverride!==true || !status.weekend){
+      status = {holidayOverride:true, weekend:true, liveChecked:key, liveOk:true, tasks:{}};
+      await sSet('day:'+key, status);
+    }
+    currentDayStatus = status;
+    renderHolidaySeg();
+    renderBooksArea();
+    return;
+  }
+  askRow.style.display='flex';
+  apiRow.style.display='flex';
+  weekendNotice.style.display='none';
+
+  let status = await sGet('day:'+key);
+  const dayBooks = schedule[wd] || [];
+
+  let liveResult = {ok:false,isHoliday:null};
+  const dot=document.getElementById('apiDot'), note=document.getElementById('apiNoteTxt');
+  if(force || !status || status.liveChecked!==key){
+    note.textContent='در حال بررسی تقویم زنده…';
+    liveResult = await checkHolidayLive(todayJ.jy,todayJ.jm,todayJ.jd);
+  }
+
+  if(!status){
+    status = {
+      holidayOverride: liveResult.ok ? liveResult.isHoliday : null,
+      liveChecked:key,
+      liveOk: liveResult.ok,
+      tasks:{}
+    };
+    dayBooks.forEach(id=>status.tasks[id]={has:null,done:false,note:''});
+    await sSet('day:'+key, status);
+  } else if(force && liveResult.ok && status.holidayOverride===null){
+    // only auto-fill if user never manually answered
+    status.holidayOverride = liveResult.isHoliday;
+    status.liveOk = true;
+    await sSet('day:'+key, status);
+  }
+  dayBooks.forEach(id=>{ if(!status.tasks[id]) status.tasks[id]={has:null,done:false,note:''}; });
+
+  if(liveResult.ok){dot.className='dot ok';note.textContent='تقویم زنده متصل شد ✓';}
+  else if(status.liveOk){dot.className='dot ok';note.textContent='تقویم زنده متصل شد ✓';}
+  else{dot.className='dot fail';note.textContent='عدم دسترسی به تقویم زنده — لطفاً خودت تأیید کن';}
+
+  currentDayStatus = status;
+  renderHolidaySeg();
+  renderBooksArea();
+}
+
+function renderHolidaySeg(){
+  const seg=document.getElementById('holidaySeg');
+  seg.querySelectorAll('button').forEach(b=>{
+    const isYes = b.dataset.v==='yes';
+    b.classList.toggle('active', currentDayStatus.holidayOverride===isYes);
+  });
+  document.getElementById('hdrHolidayPill').style.display = currentDayStatus.holidayOverride ? 'block':'none';
+}
+
+async function setHolidayOverride(val){
+  currentDayStatus.holidayOverride = val;
+  const key = dateKey(todayJ.jy,todayJ.jm,todayJ.jd);
+  await sSet('day:'+key, currentDayStatus);
+  renderHolidaySeg();
+  renderBooksArea();
+  renderTodayProgress();
+  renderCalendar();
+}
+
+function renderBooksArea(){
+  const area=document.getElementById('booksArea');
+  area.innerHTML='';
+  const wd = jWeekday(todayJ.jy,todayJ.jm,todayJ.jd);
+  const dayBooks = schedule[wd] || [];
+
+  if(currentDayStatus.holidayOverride===true){
+    area.innerHTML = `<div class="card empty"><div class="em-icon">🌙</div>امروز تعطیل رسمی است.<br>برنامه درسی امروز نمایش داده نمی‌شود.</div>`;
+    return;
+  }
+  if(dayBooks.length===0){
+    area.innerHTML = `<div class="card empty"><div class="em-icon">🗂</div>برای «${WEEKDAYS[wd]}» هنوز کتابی در برنامه هفتگی ثبت نشده.<br>از بخش «برنامه» اضافه کن.</div>`;
+    return;
+  }
+
+  const wrap=document.createElement('div');
+  wrap.className='card';
+  wrap.innerHTML=`<h3>📚 کتاب‌های امروز</h3>`;
+  const list=document.createElement('div');
+
+  dayBooks.forEach(id=>{
+    const bk=BOOKS.find(b=>b.id===id);
+    if(!bk) return;
+    const t = currentDayStatus.tasks[id] || {has:null,done:false};
+    const div=document.createElement('div');
+    div.className='book'+(t.has===false?' closed':'')+(t.done?' done':'');
+    div.id='book-'+id;
+
+    const statusTxt = t.has===null ? 'در انتظار پاسخ' : (t.has? (t.done?'تکلیف انجام شد ✅':'تکلیف دارد — انجام نشده'):'بدون تکلیف');
+
+    div.style.borderRight = `3px solid ${bk.color||'var(--rule)'}`;
+    const pTag = bk.priority===3 ? '<span class="priority-tag p3">کلیدی</span>' : (bk.priority===2 ? '<span class="priority-tag p2">مهم</span>' : '');
+    div.innerHTML = `
+      <div class="book-head" onclick="toggleBook('${id}')">
+        <div class="book-icon" style="background:${bk.color||'var(--ink)'}">${bk.icon}</div>
+        <div style="flex:1">
+          <div class="book-name">${bk.name} ${pTag}</div>
+          <div class="book-status">${statusTxt}</div>
+          ${bk.tip && t.has!==false ? `<div class="tip-inline">${escapeHtml(bk.tip)}</div>` : ''}
+          ${t.has===true && t.note ? `<div class="book-note-preview">📝 ${escapeHtml(t.note)}</div>` : ''}
+        </div>
+        ${t.done?'<span class="badge done">انجام شد</span>':''}
+        <span class="chev">▾</span>
+      </div>
+      <div class="book-body">
+        <div class="book-inner">
+          <div class="hw-q">آیا تکلیف از این کتاب داری؟</div>
+          <div class="hw-btns">
+            <button class="yes ${t.has===true?'active':''}" onclick="setHas('${id}',true,event)">بله دارم</button>
+            <button class="no ${t.has===false?'active':''}" onclick="setHas('${id}',false,event)">نه ندارم</button>
+          </div>
+          ${t.has===true?`
+          <div class="hw-note-label">تکلیفت رو اینجا بنویس:</div>
+          <textarea class="hw-note" placeholder="مثلاً: صفحه ۴۵ تمرین ۳ تا ۷" onclick="event.stopPropagation()" oninput="setNote('${id}',this.value)">${t.note?escapeHtml(t.note):''}</textarea>
+          <div class="check-row">
+            <input type="checkbox" id="chk-${id}" ${t.done?'checked':''} onchange="setDone('${id}',this.checked)">
+            <label for="chk-${id}">تکلیف را انجام دادم</label>
+          </div>`:''}
+        </div>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+  wrap.appendChild(list);
+  area.appendChild(wrap);
+  renderTodayProgress();
+}
+
+function toggleBook(id){
+  const el=document.getElementById('book-'+id);
+  const willOpen = !el.classList.contains('open');
+  document.querySelectorAll('.book.open').forEach(b=>b.classList.remove('open'));
+  if(willOpen) el.classList.add('open');
+}
+
+async function setHas(id,val,ev){
+  ev.stopPropagation();
+  currentDayStatus.tasks[id] = currentDayStatus.tasks[id]||{};
+  currentDayStatus.tasks[id].has = val;
+  if(!val) currentDayStatus.tasks[id].done = false;
+  const key = dateKey(todayJ.jy,todayJ.jm,todayJ.jd);
+  await sSet('day:'+key, currentDayStatus);
+  renderBooksArea();
+}
+async function setDone(id,val){
+  currentDayStatus.tasks[id].done = val;
+  const key = dateKey(todayJ.jy,todayJ.jm,todayJ.jd);
+  await sSet('day:'+key, currentDayStatus);
+  renderBooksArea();
+}
+let noteSaveTimer=null;
+function setNote(id,val){
+  currentDayStatus.tasks[id].note = val;
+  clearTimeout(noteSaveTimer);
+  noteSaveTimer=setTimeout(async ()=>{
+    const key = dateKey(todayJ.jy,todayJ.jm,todayJ.jd);
+    await sSet('day:'+key, currentDayStatus);
+  },400);
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderTodayProgress(){
+  const wd = jWeekday(todayJ.jy,todayJ.jm,todayJ.jd);
+  const dayBooks = schedule[wd] || [];
+  let relevant = 0, done = 0;
+  dayBooks.forEach(id=>{
+    const t = currentDayStatus.tasks[id];
+    if(t && t.has===true){relevant++; if(t.done) done++;}
+  });
+  const pct = relevant? Math.round(done/relevant*100):0;
+  const circ=201;
+  document.getElementById('ringToday').style.strokeDashoffset = circ - (circ*pct/100);
+  document.getElementById('ringTodayLabel').textContent = toFaDigits(pct)+'%';
+  const txt=document.getElementById('progressTxtToday');
+  if(currentDayStatus.holidayOverride===true){
+    txt.innerHTML = `امروز تعطیل است، استراحت کن 🌙`;
+  } else if(relevant===0){
+    txt.innerHTML = `هنوز تکلیفی ثبت نکردی، یا امروز تکلیفی نداری.`;
+  } else {
+    txt.innerHTML = `<b>${toFaDigits(done)}</b> از <b>${toFaDigits(relevant)}</b> تکلیف امروز انجام شده.`;
+  }
+}
+
+/* ---------- Calendar ---------- */
+function calShift(dir){
+  calViewM += dir;
+  if(calViewM>12){calViewM=1;calViewY++;}
+  if(calViewM<1){calViewM=12;calViewY--;}
+  renderCalendar();
+}
+async function renderCalendar(){
+  document.getElementById('calTitle').textContent = `${JMONTHS[calViewM-1]} ${toFaDigits(calViewY)}`;
+  const grid=document.getElementById('calGrid');
+  grid.innerHTML='';
+  ['ش','ی','د','س','چ','پ','ج'].forEach(d=>{
+    const el=document.createElement('div');el.className='dow';el.textContent=d;grid.appendChild(el);
+  });
+
+  // Connect to the (global) official Iranian holiday source for this month
+  // and pre-color every official holiday red by default.
+  const apiRow=document.getElementById('calApiNote');
+  if(apiRow) apiRow.style.display='flex';
+  const dot=document.getElementById('calApiDot'), txt=document.getElementById('calApiTxt');
+  if(dot){dot.className='dot';txt.textContent='در حال اتصال به تقویم رسمی…';}
+  await loadMonthHolidays(calViewY,calViewM);
+
+  const firstWd = jWeekday(calViewY,calViewM,1);
+  const len = jMonthLen(calViewY,calViewM);
+  for(let i=0;i<firstWd;i++){
+    const e=document.createElement('div');e.className='cal-cell empty';grid.appendChild(e);
+  }
+  for(let d=1;d<=len;d++){
+    const cell=document.createElement('div');
+    cell.className='cal-cell';
+    cell.innerHTML=`<span class="day-num">${toFaDigits(d)}</span>`;
+    const key=dateKey(calViewY,calViewM,d);
+    if(calViewY===todayJ.jy && calViewM===todayJ.jm && d===todayJ.jd) cell.classList.add('today');
+    const cellWd = jWeekday(calViewY,calViewM,d);
+
+    // Priority: explicit user override (either way) > official/live holiday > weekend default.
+    const st = await sGet('day:'+key);
+    const officialInfo = monthHolidayMap[key];
+    const isOfficialHoliday = !!(officialInfo && officialInfo.isHoliday);
+
+    let isHolidayCell;
+    if(st && st.holidayOverride===false){
+      isHolidayCell = false; // user explicitly said "not a holiday" — respect that
+    } else if(st && st.holidayOverride===true){
+      isHolidayCell = true;
+    } else {
+      isHolidayCell = isWeekend(cellWd) || isOfficialHoliday;
+    }
+    if(isHolidayCell) cell.classList.add('holiday');
+
+    const nt = await sGet('note:'+key);
+    if(nt && nt.text) cell.classList.add('note');
+    cell.onclick=()=>openCalDay(calViewY,calViewM,d);
+    grid.appendChild(cell);
+  }
+}
+async function openCalDay(jy,jm,jd){
+  selectedCalDate = {jy,jm,jd};
+  const key=dateKey(jy,jm,jd);
+  document.getElementById('calDayCard').style.display='block';
+  document.getElementById('calDayTitle').textContent = `${toFaDigits(jd)} ${JMONTHS[jm-1]} ${toFaDigits(jy)} · ${WEEKDAYS[jWeekday(jy,jm,jd)]}`;
+  const nt = await sGet('note:'+key);
+  document.getElementById('calNoteBox').value = nt? nt.text : '';
+  const evEl = document.getElementById('calDayEvent');
+  const wd = jWeekday(jy,jm,jd);
+  evEl.innerHTML = `<div class="cal-day-event"><div class="ev-title">در حال دریافت اطلاعات روز…</div></div>`;
+
+  let info = monthHolidayMap[key];
+  // Always try live lookup so the reason is up-to-date from the online calendar
+  const live = await checkHolidayLive(jy,jm,jd);
+  if(live.ok){
+    info = {isHoliday: live.isHoliday, event: live.event || ''};
+    monthHolidayMap[key] = info;
+  }
+
+  let html = '';
+  if(isWeekend(wd)){
+    html = `<div class="cal-day-event">
+      <div class="ev-title">تعطیل رسمی هفتگی</div>
+      <div class="ev-detail">${WEEKDAYS[wd]} طبق تقویم رسمی ایران همیشه تعطیل است.${info && info.event ? '<br>'+escapeHtml(info.event) : ''}</div>
+    </div>`;
+  } else if(info && info.isHoliday){
+    html = `<div class="cal-day-event">
+      <div class="ev-title">تعطیل رسمی</div>
+      <div class="ev-detail">${info.event ? escapeHtml(info.event) : 'این روز در تقویم رسمی ایران تعطیل اعلام شده است.'}</div>
+    </div>`;
+  } else if(info && info.event){
+    html = `<div class="cal-day-event">
+      <div class="ev-title">رویداد تقویم</div>
+      <div class="ev-detail">${escapeHtml(info.event)}</div>
+    </div>`;
+  } else if(live.ok === false){
+    html = `<div class="cal-day-event">
+      <div class="ev-title">وضعیت روز</div>
+      <div class="ev-detail">اتصال به تقویم آنلاین برقرار نشد. ${isWeekend(wd) ? WEEKDAYS[wd]+' معمولاً تعطیل است.' : 'روز کاری محسوب می‌شود مگر خلاف آن اعلام شود.'}</div>
+    </div>`;
+  } else {
+    html = `<div class="cal-day-event">
+      <div class="ev-title">روز عادی</div>
+      <div class="ev-detail">این روز در تقویم رسمی تعطیل نیست.</div>
+    </div>`;
+  }
+  evEl.innerHTML = html;
+}
+async function saveCalNote(){
+  if(!selectedCalDate) return;
+  const key=dateKey(selectedCalDate.jy,selectedCalDate.jm,selectedCalDate.jd);
+  const text = document.getElementById('calNoteBox').value.trim();
+  await sSet('note:'+key, {text});
+  renderCalendar();
+}
+
+/* ---------- Progress screen (advanced) ---------- */
+async function calcDayCompletion(key){
+  const st = await sGet('day:'+key);
+  if(!st || st.holidayOverride===true) return null;
+  let rel=0, done=0;
+  Object.keys(st.tasks||{}).forEach(id=>{
+    const t=st.tasks[id];
+    if(t && t.has===true){ rel++; if(t.done) done++; }
+  });
+  if(rel===0) return null;
+  return {rel, done, pct: Math.round(done/rel*100)};
+}
+
+async function calcStreak(){
+  let streak=0;
+  for(let i=0;i<60;i++){
+    const g=new Date(); g.setDate(g.getDate()-i);
+    const j=toJalali(g.getFullYear(),g.getMonth()+1,g.getDate());
+    const wd=jWeekday(j.jy,j.jm,j.jd);
+    if(isWeekend(wd)) continue;
+    const key=dateKey(j.jy,j.jm,j.jd);
+    const c=await calcDayCompletion(key);
+    if(c===null){
+      // no homework logged — break if not today
+      if(i===0) continue;
+      break;
+    }
+    if(c.pct>=50) streak++;
+    else { if(i>0) break; }
+  }
+  return streak;
+}
+
+async function loadStudyMinutes(){
+  const log = (await sGet('studyLog')) || [];
+  // sum last 30 days
+  const cutoff = Date.now() - 30*86400000;
+  let min=0;
+  log.forEach(e=>{ if(e.ts>=cutoff) min += (e.minutes||0); });
+  return Math.round(min);
+}
+
+async function logStudySession(minutes){
+  if(!minutes || minutes<1) return;
+  const log = (await sGet('studyLog')) || [];
+  log.push({ts:Date.now(), minutes:Math.round(minutes)});
+  // keep last 200 entries
+  while(log.length>200) log.shift();
+  await sSet('studyLog', log);
+}
+
+async function renderProgressScreen(){
+  let totalRelevant=0, totalDone=0;
+  const perBook = {};
+  BOOKS.forEach(b=>perBook[b.id]={relevant:0,done:0});
+  const weekDays = []; // last 7 calendar days completion
+
+  for(let i=0;i<30;i++){
+    const g = new Date();
+    g.setDate(g.getDate()-i);
+    const j = toJalali(g.getFullYear(), g.getMonth()+1, g.getDate());
+    const key = dateKey(j.jy,j.jm,j.jd);
+    const st = await sGet('day:'+key);
+    if(!st || st.holidayOverride===true){
+      if(i<7) weekDays.push({i, j, pct:null, label:WEEKDAYS[jWeekday(j.jy,j.jm,j.jd)]});
+      continue;
+    }
+    let dayRel=0, dayDone=0;
+    Object.keys(st.tasks||{}).forEach(id=>{
+      const t=st.tasks[id];
+      if(t.has===true){
+        dayRel++; if(t.done) dayDone++;
+        if(i<7){totalRelevant++; if(t.done) totalDone++;}
+        if(perBook[id]){perBook[id].relevant++; if(t.done) perBook[id].done++;}
+      }
+    });
+    if(i<7){
+      weekDays.push({
+        i, j,
+        pct: dayRel? Math.round(dayDone/dayRel*100):null,
+        label: WEEKDAYS[jWeekday(j.jy,j.jm,j.jd)]
+      });
+    }
+  }
+
+  const pct = totalRelevant? Math.round(totalDone/totalRelevant*100):0;
+  const circ=201;
+  const ringEl=document.getElementById('ringWeek');
+  if(ringEl) ringEl.style.strokeDashoffset = circ-(circ*pct/100);
+  const ringLbl=document.getElementById('ringWeekLabel');
+  if(ringLbl) ringLbl.textContent = toFaDigits(pct)+'%';
+  const txt=document.getElementById('progressTxtWeek');
+  if(txt) txt.innerHTML =
+    totalRelevant? `<b>${toFaDigits(totalDone)}</b> از <b>${toFaDigits(totalRelevant)}</b> تکلیف هفته اخیر انجام شده.` : 'هنوز داده‌ای برای ۷ روز اخیر ثبت نشده.';
+
+  const streak = await calcStreak();
+  const studyMin = await loadStudyMinutes();
+  const sw=document.getElementById('statWeekPct');
+  const ss=document.getElementById('statStreak');
+  const sm=document.getElementById('statStudyMin');
+  if(sw) sw.textContent = toFaDigits(pct)+'٪';
+  if(ss) ss.textContent = toFaDigits(streak);
+  if(sm) sm.textContent = toFaDigits(studyMin);
+
+  const banner=document.getElementById('streakBanner');
+  if(banner){
+    if(streak>=7) banner.innerHTML = `عالی! <b>${toFaDigits(streak)}</b> روز پیاپی مطالعه و تکلیف ثبت کرده‌ای. ادامه بده.`;
+    else if(streak>=3) banner.innerHTML = `زنجیرهٔ خوب: <b>${toFaDigits(streak)}</b> روز پیاپی. سعی کن به هفت روز برسی.`;
+    else if(streak>=1) banner.innerHTML = `امروز را هم تکمیل کن تا زنجیرهٔ <b>${toFaDigits(streak)}</b> روزه‌ات قطع نشود.`;
+    else banner.innerHTML = `برای ساختن زنجیرهٔ مطالعه، هر روز تکالیف را ثبت و انجام‌شده علامت بزن.`;
+  }
+
+  // week strip (oldest → newest left-to-right in RTL visual: reverse for display)
+  const strip=document.getElementById('weekStrip');
+  if(strip){
+    strip.innerHTML='';
+    [...weekDays].reverse().forEach(d=>{
+      const cell=document.createElement('div');
+      let cls='wd';
+      if(d.pct===null) cls+=' empty';
+      else if(d.pct>=80) cls+=' good';
+      else if(d.pct>=40) cls+=' mid';
+      else cls+=' bad';
+      cell.className=cls;
+      cell.innerHTML = `<div>${d.label.slice(0,2)}</div><div class="wd-pct">${d.pct===null?'—':toFaDigits(d.pct)+'٪'}</div>`;
+      strip.appendChild(cell);
+    });
+  }
+
+  // per-book colored bars
+  const bs=document.getElementById('bookStats');
+  if(bs){
+    bs.innerHTML='';
+    // sort by activity then name
+    const sorted=[...BOOKS].sort((a,b)=>{
+      const sa=perBook[a.id], sb=perBook[b.id];
+      return (sb.relevant-sa.relevant) || a.name.localeCompare(b.name,'fa');
+    });
+    sorted.forEach(b=>{
+      const s=perBook[b.id];
+      const p = s.relevant? Math.round(s.done/s.relevant*100):0;
+      const row=document.createElement('div');
+      row.className='book-stat-row';
+      row.innerHTML=`
+        <div class="book-stat-swatch" style="background:${b.color}"></div>
+        <div style="width:28px;text-align:center;font-size:16px">${b.icon}</div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px;">
+            <span style="font-size:13.5px;font-weight:700">${b.name}</span>
+            <span style="font-size:12px;font-weight:800;color:${b.color};direction:ltr">${toFaDigits(p)}٪</span>
+          </div>
+          <div class="book-stat-bar-bg">
+            <div class="book-stat-bar-fg" style="width:${p}%;background:${b.color}"></div>
+          </div>
+          <div class="book-stat-meta">${s.relevant? `${toFaDigits(s.done)} از ${toFaDigits(s.relevant)} تکلیف انجام‌شده` : 'هنوز تکلیفی ثبت نشده'}</div>
+        </div>
+      `;
+      bs.appendChild(row);
+    });
+  }
+
+  // grade averages per subject
+  await renderGradeAverages();
+}
+
+async function renderGradeAverages(){
+  const el=document.getElementById('gradeAvgList');
+  if(!el) return;
+  const grades = await loadGrades();
+  const byBook={};
+  grades.forEach(g=>{
+    if(!byBook[g.bookId]) byBook[g.bookId]=[];
+    byBook[g.bookId].push(Number(g.score));
+  });
+  const ids=Object.keys(byBook);
+  if(ids.length===0){
+    el.innerHTML=`<div class="rem-empty">هنوز نمره‌ای ثبت نشده. از بخش «بیشتر» نمره اضافه کن.</div>`;
+    return;
+  }
+  el.innerHTML='';
+  ids.sort((a,b)=>{
+    const avgA=byBook[a].reduce((s,x)=>s+x,0)/byBook[a].length;
+    const avgB=byBook[b].reduce((s,x)=>s+x,0)/byBook[b].length;
+    return avgB-avgA;
+  }).forEach(id=>{
+    const bk=BOOKS.find(b=>b.id===id);
+    const arr=byBook[id];
+    const avg=arr.reduce((s,x)=>s+x,0)/arr.length;
+    const avgR=Math.round(avg*100)/100;
+    const barPct=Math.min(100, Math.round(avg/20*100));
+    const col=bookColor(id);
+    const row=document.createElement('div');
+    row.className='book-stat-row';
+    row.innerHTML=`
+      <div class="book-stat-swatch" style="background:${col}"></div>
+      <div style="width:28px;text-align:center">${bk?bk.icon:'📝'}</div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px;">
+          <span>${bk?bk.name:id}</span>
+          <span style="color:${col};direction:ltr">${toFaDigits(avgR)} / ۲۰</span>
+        </div>
+        <div class="book-stat-bar-bg">
+          <div class="book-stat-bar-fg" style="width:${barPct}%;background:${col}"></div>
+        </div>
+        <div class="book-stat-meta">${toFaDigits(arr.length)} نمره ثبت‌شده · کمینه ${toFaDigits(Math.min(...arr))} · بیشینه ${toFaDigits(Math.max(...arr))}</div>
+      </div>
+    `;
+    el.appendChild(row);
+  });
+}
+
+/* ---------- Full refresh ---------- */
+async function fullRefresh(){
+  const btn=document.getElementById('refreshBtn');
+  btn.classList.add('spin');
+  schedule = (await sGet('weeklySchedule')) || {};
+  renderDayTabs();
+  renderBookPick();
+  await backfillScheduleDays();
+  await loadTodayFlow(true);
+  await renderCalendar();
+  await renderProgressScreen();
+  await checkMissedItems();
+  showToast('به‌روزرسانی شد ✓');
+  setTimeout(()=>btn.classList.remove('spin'),650);
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+/* ---------- Personal reminders (custom time + message, stays until dismissed) ---------- */
+function initReminderForm(){
+  const hSel=document.getElementById('remHour');
+  const mSel=document.getElementById('remMinute');
+  if(hSel.options.length===0){
+    for(let h=0;h<24;h++){
+      const o=document.createElement('option');
+      o.value=h; o.textContent=toFaDigits(pad2(h));
+      hSel.appendChild(o);
+    }
+  }
+  if(mSel.options.length===0){
+    for(let m=0;m<60;m+=5){
+      const o=document.createElement('option');
+      o.value=m; o.textContent=toFaDigits(pad2(m));
+      mSel.appendChild(o);
+    }
+  }
+  const now=new Date();
+  hSel.value = now.getHours();
+  const roundedM = Math.min(55, Math.round(now.getMinutes()/5)*5);
+  mSel.value = roundedM;
+}
+
+async function loadReminders(){
+  reminders = (await sGet('reminders')) || [];
+  renderReminderList();
+}
+async function saveReminders(){
+  await sSet('reminders', reminders);
+}
+
+async function addReminder(){
+  const wasEditing = !!editingReminderId;
+  const h = parseInt(document.getElementById('remHour').value,10);
+  const m = parseInt(document.getElementById('remMinute').value,10);
+  const msgEl = document.getElementById('remMsg');
+  const msg = msgEl.value.trim();
+  if(!msg){ msgEl.focus(); return; }
+  if(editingReminderId){
+    const r = reminders.find(x=>x.id===editingReminderId);
+    if(r){ r.hour=h; r.minute=m; r.message=msg; }
+    editingReminderId = null;
+    document.getElementById('remAddBtn').textContent = '➕ افزودن یادآوری';
+    document.getElementById('remCancelBtn').style.display='none';
+  } else {
+    reminders.push({id: 'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6), hour:h, minute:m, message:msg});
+  }
+  reminders.sort((a,b)=> (a.hour*60+a.minute) - (b.hour*60+b.minute));
+  await saveReminders();
+  msgEl.value='';
+  renderReminderList();
+  showToast(wasEditing ? 'ذخیره شد ✓' : 'یادآوری اضافه شد ✓');
+}
+
+function editReminder(id){
+  const r = reminders.find(x=>x.id===id);
+  if(!r) return;
+  editingReminderId = id;
+  document.getElementById('remHour').value = r.hour;
+  document.getElementById('remMinute').value = r.minute - (r.minute%5);
+  document.getElementById('remMsg').value = r.message;
+  document.getElementById('remAddBtn').textContent = '💾 ذخیره تغییرات';
+  document.getElementById('remCancelBtn').style.display='block';
+  document.getElementById('remMsg').focus();
+}
+function cancelEditReminder(){
+  editingReminderId = null;
+  document.getElementById('remMsg').value='';
+  document.getElementById('remAddBtn').textContent = '➕ افزودن یادآوری';
+  document.getElementById('remCancelBtn').style.display='none';
+}
+
+async function deleteReminder(id){
+  reminders = reminders.filter(r=>r.id!==id);
+  await saveReminders();
+  if(editingReminderId===id) cancelEditReminder();
+  renderReminderList();
+}
+
+function renderReminderList(){
+  const list=document.getElementById('reminderList');
+  if(!list) return;
+  if(reminders.length===0){
+    list.innerHTML = `<div class="rem-empty">هنوز یادآوری‌ای اضافه نکردی.</div>`;
+    return;
+  }
+  list.innerHTML='';
+  reminders.forEach(r=>{
+    const row=document.createElement('div');
+    row.className='rem-item';
+    row.innerHTML = `
+      <div class="rem-time">${toFaDigits(pad2(r.hour))}:${toFaDigits(pad2(r.minute))}</div>
+      <div class="rem-msg">${escapeHtml(r.message)}</div>
+      <button class="rem-del" style="background:#EAF4EF;color:var(--iran-turq);" onclick="editReminder('${r.id}')">✏️</button>
+      <button class="rem-del" onclick="deleteReminder('${r.id}')">🗑</button>
+    `;
+    list.appendChild(row);
+  });
+}
+
+function todayGregKey(){
+  const now=new Date();
+  return `${now.getFullYear()}-${pad2(now.getMonth()+1)}-${pad2(now.getDate())}`;
+}
+
+async function checkReminders(){
+  if(!reminders || reminders.length===0) return;
+  const now = new Date();
+  const curH = now.getHours(), curM = now.getMinutes();
+  const gKey = todayGregKey();
+  for(const r of reminders){
+    const due = (r.hour < curH) || (r.hour===curH && r.minute<=curM);
+    if(!due) continue;
+    const seen = await sGet('reminderSeen:'+r.id+':'+gKey);
+    if(seen) continue;
+    if(activeReminderId===r.id || reminderQueue.includes(r.id)) continue;
+    reminderQueue.push(r.id);
+    // Persistent system notification through the service worker (mobile-safe).
+    const notified = await sGet('reminderNotified:'+r.id+':'+gKey);
+    if(!notified && 'Notification' in window && Notification.permission==='granted'){
+      const ok = await showSystemNotification(
+        '⏰ پلنر من',
+        r.message,
+        {
+          tag:'planner-reminder-'+r.id+'-'+gKey,
+          requireInteraction:true,
+          vibrate:[350,120,350,120,650],
+          data:{url:'./', reminderId:r.id}
+        }
+      );
+      if(ok) await sSet('reminderNotified:'+r.id+':'+gKey, true);
+    }
+  }
+  if(!activeReminderId && reminderQueue.length>0){
+    showNextReminder();
+  }
+}
+
+function showNextReminder(){
+  const id = reminderQueue.shift();
+  const r = reminders.find(x=>x.id===id);
+  if(!r) return;
+  activeReminderId = id;
+  document.getElementById('remOverlayTime').textContent = `${toFaDigits(pad2(r.hour))}:${toFaDigits(pad2(r.minute))}`;
+  document.getElementById('remOverlayMsg').textContent = r.message;
+  document.getElementById('reminderOverlay').classList.add('open');
+}
+
+async function dismissActiveReminder(){
+  if(!activeReminderId) return;
+  const gKey = todayGregKey();
+  await sSet('reminderSeen:'+activeReminderId+':'+gKey, true);
+  document.getElementById('reminderOverlay').classList.remove('open');
+  activeReminderId = null;
+  if(reminderQueue.length>0){
+    setTimeout(showNextReminder, 300);
+  }
+}
+
+/* ---------- Backup / Restore (export all storage to a JSON file, and re-import it) ---------- */
+async function exportBackup(){
+  try{
+    const keys = await sListKeys();
+    const data = {};
+    for(const k of keys){
+      try{
+        const raw = localStorage.getItem(LS_PREFIX+k);
+        if(raw!==null) data[k] = raw;
+      }catch(e){}
+    }
+    const payload = {app:'planner-shahaneh', exportedAt: new Date().toISOString(), data};
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `planner-backup-${todayGregKey()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 2000);
+    showToast('فایل پشتیبان دانلود شد ✓');
+  }catch(e){
+    showToast('خطا در تهیه فایل پشتیبان');
+  }
+}
+
+async function importBackupFile(file){
+  if(!file) return;
+  try{
+    const text = await file.text();
+    const payload = JSON.parse(text);
+    const data = payload && payload.data ? payload.data : payload;
+    const keys = Object.keys(data||{});
+    if(keys.length===0){ showToast('فایل پشتیبان خالی است'); return; }
+    for(const k of keys){
+      localStorage.setItem(LS_PREFIX+k, data[k]);
+    }
+    showToast(`بازیابی شد (${toFaDigits(keys.length)} مورد) — در حال بارگذاری مجدد…`);
+    setTimeout(()=>location.reload(), 1200);
+  }catch(e){
+    showToast('فایل پشتیبان نامعتبر است');
+  }
+}
+
+/* ---------- Add to Home Screen (Chrome/Google PWA install) ---------- */
+let deferredInstallPrompt=null;
+window.addEventListener('beforeinstallprompt', (e)=>{
+  e.preventDefault();
+  deferredInstallPrompt=e;
+});
+window.addEventListener('appinstalled', ()=>{
+  deferredInstallPrompt=null;
+  showToast('پلنر به صفحه اصلی اضافه شد ✓');
+});
+window.addEventListener('visibilitychange', async ()=>{
+  if(document.visibilityState==='visible'){
+    await checkReminders();
+    await notifyMissedItems();
+    updateNotificationStatus();
+  }
+});
+window.addEventListener('pageshow', async ()=>{
+  await checkReminders();
+  updateNotificationStatus();
+});
+// Service worker is registered from the real ./sw.js file.
+function installApp(){
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+    deferredInstallPrompt.userChoice.finally(()=>{deferredInstallPrompt=null;});
+    return;
+  }
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const steps = document.getElementById('installSteps');
+  if(isIOS){
+    steps.innerHTML = '<li>این صفحه رو در Safari باز کن</li><li>روی دکمه اشتراک‌گذاری (مربع با فلش) بزن</li><li>«Add to Home Screen» را انتخاب کن</li>';
+  } else {
+    steps.innerHTML = '<li>مرورگر Chrome (گوگل) رو باز کن</li><li>روی سه‌نقطه بالای صفحه بزن</li><li>«افزودن به صفحه اصلی» یا «Install app» رو انتخاب کن</li>';
+  }
+  document.getElementById('installModal').classList.add('open');
+}
+
+/* ---------- Live analog clock ---------- */
+function buildClockFace(){
+  const ticksG=document.getElementById('clockTicks');
+  const numG=document.getElementById('clockNumerals');
+  let ticksHtml='';
+  for(let i=0;i<60;i++){
+    const angle=i*6;
+    const major = i%5===0;
+    const r1 = major? 78:82;
+    const r2 = 90;
+    const rad = (angle-90)*Math.PI/180;
+    const x1=100+r1*Math.cos(rad), y1=100+r1*Math.sin(rad);
+    const x2=100+r2*Math.cos(rad), y2=100+r2*Math.sin(rad);
+    ticksHtml+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${major?'var(--iran-gold)':'var(--line)'}" stroke-width="${major?2:1}" stroke-linecap="round"/>`;
+  }
+  ticksG.innerHTML=ticksHtml;
+
+  const nums=[[12,100,30],[3,172,105],[6,100,176],[9,28,105]];
+  let numHtml='';
+  nums.forEach(([n,x,y])=>{
+    numHtml+=`<text x="${x}" y="${y}" text-anchor="middle" font-family="Sahel" font-weight="800" font-size="15" fill="var(--iran-green)">${toFaDigits(n)}</text>`;
+  });
+  numG.innerHTML=numHtml;
+}
+function tickClock(){
+  const now=new Date();
+  const h=now.getHours()%12, m=now.getMinutes(), s=now.getSeconds();
+  const hAngle=h*30+m*0.5;
+  const mAngle=m*6+s*0.1;
+  const sAngle=s*6;
+  document.getElementById('clockHourHand').setAttribute('transform',`rotate(${hAngle} 100 100)`);
+  document.getElementById('clockMinHand').setAttribute('transform',`rotate(${mAngle} 100 100)`);
+  document.getElementById('clockSecHand').setAttribute('transform',`rotate(${sAngle} 100 100)`);
+  const h24=now.getHours();
+  document.getElementById('clockDigital').textContent =
+    `${toFaDigits(pad2(h24))}:${toFaDigits(pad2(m))}:${toFaDigits(pad2(s))}`;
+}
+function startClock(){
+  buildClockFace();
+  tickClock();
+  setInterval(tickClock,1000);
+}
+
+/* ---------- Lock screen logic ---------- */
+// The PIN itself is never stored as plain text in the code — only its
+// SHA-256 hash is compared, so casually opening "View Source" doesn't
+// reveal the number directly. (Note: a 4-digit PIN can still in principle
+// be brute-forced by someone determined and technical — true security for
+// a static, client-only page has hard limits — but a repeated-attempt
+// lockout below makes quick guessing impractical.)
+const LOCK_PIN_HASH = '01d77b0b1bd2fecc8ddd43210d4d10934aa31db043675f53eb46907a031d10d2';
+let lockEntered = '';
+let lockBusy = false;
+let lockFailCount = 0;
+let lockLockoutUntil = 0;
+
+async function sha256Hex(str){
+  const enc = new TextEncoder().encode(str);
+  const buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function lockRenderDots(){
+  const dots = document.querySelectorAll('#lockDots .lock-dot');
+  dots.forEach((d,i)=>d.classList.toggle('filled', i < lockEntered.length));
+}
+function lockIsLockedOut(){
+  return Date.now() < lockLockoutUntil;
+}
+function lockPress(digit){
+  if(lockBusy || lockIsLockedOut()) return;
+  if(lockEntered.length>=4) return;
+  lockEntered += digit;
+  lockRenderDots();
+  document.getElementById('lockError').textContent='';
+  if(lockEntered.length===4){
+    lockBusy=true;
+    setTimeout(lockCheck, 140);
+  }
+}
+function lockClear(){
+  if(lockBusy || lockIsLockedOut()) return;
+  lockEntered='';
+  lockRenderDots();
+  document.getElementById('lockError').textContent='';
+}
+function lockBackspace(){
+  if(lockBusy || lockIsLockedOut()) return;
+  lockEntered = lockEntered.slice(0,-1);
+  lockRenderDots();
+}
+async function lockCheck(){
+  const hash = await sha256Hex(lockEntered);
+  if(hash===LOCK_PIN_HASH){
+    lockFailCount = 0;
+    unlockApp();
+  } else {
+    lockFailCount++;
+    const wrap=document.getElementById('lockDotsWrap');
+    wrap.classList.add('shake');
+    if(lockFailCount>=5){
+      const waitSec = 30;
+      lockLockoutUntil = Date.now() + waitSec*1000;
+      lockStartLockoutCountdown(waitSec);
+    } else {
+      document.getElementById('lockError').textContent='رمز اشتباه است — دوباره تلاش کن';
+    }
+    setTimeout(()=>{
+      wrap.classList.remove('shake');
+      lockEntered='';
+      lockRenderDots();
+      lockBusy=false;
+    },420);
+  }
+}
+function lockStartLockoutCountdown(seconds){
+  let remaining = seconds;
+  const errEl = document.getElementById('lockError');
+  const tick=()=>{
+    if(remaining<=0){
+      errEl.textContent='';
+      lockFailCount=0;
+      return;
+    }
+    errEl.textContent = `تعداد تلاش‌ها زیاد بود — ${toFaDigits(remaining)} ثانیه صبر کن`;
+    remaining--;
+    setTimeout(tick,1000);
+  };
+  tick();
+}
+function unlockApp(){
+  const lock=document.getElementById('lockScreen');
+  lock.style.transition='opacity .35s ease';
+  lock.style.opacity='0';
+  setTimeout(()=>{
+    lock.classList.add('unlocked');
+    lock.style.display='none';
+  },350);
+  init();
+  startClock();
+}
+document.addEventListener('keydown',(e)=>{
+  if(document.getElementById('lockScreen').classList.contains('unlocked')) return;
+  if(e.key>='0' && e.key<='9') lockPress(e.key);
+  else if(e.key==='Backspace') lockBackspace();
+  else if(e.key==='Escape') lockClear();
+});
+
+/* ---------- Study timer (Pomodoro-style) ---------- */
+const TIMER_PRESETS = [5,15,25,45];
+let timerTotal = 25*60;
+let timerRemaining = 25*60;
+let timerRunning = false;
+let timerInterval = null;
+
+function fmtMMSS(sec){
+  const m = Math.floor(sec/60), s = sec%60;
+  return `${toFaDigits(pad2(m))}:${toFaDigits(pad2(s))}`;
+}
+function renderTimerPresets(){
+  const el = document.getElementById('timerPresets');
+  if(!el || el.dataset.built) { updateTimerDisplay(); return; }
+  el.dataset.built='1';
+  TIMER_PRESETS.forEach(min=>{
+    const b=document.createElement('button');
+    b.textContent = toFaDigits(min)+' دقیقه';
+    if(min===25) b.classList.add('active');
+    b.onclick=()=>{
+      if(timerRunning) return;
+      el.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      timerTotal = min*60;
+      timerRemaining = min*60;
+      updateTimerDisplay();
+    };
+    el.appendChild(b);
+  });
+  updateTimerDisplay();
+}
+function updateTimerDisplay(){
+  const el=document.getElementById('timerDisplay');
+  if(el) el.textContent = fmtMMSS(timerRemaining);
+}
+function timerToggle(){
+  const btn=document.getElementById('timerToggleBtn');
+  if(timerRunning){
+    timerRunning=false;
+    clearInterval(timerInterval);
+    btn.textContent='▶ ادامه';
+  } else {
+    if(timerRemaining<=0){ timerRemaining=timerTotal; }
+    timerRunning=true;
+    btn.textContent='⏸ توقف';
+    timerInterval=setInterval(async ()=>{
+      timerRemaining--;
+      updateTimerDisplay();
+      if(timerRemaining<=0){
+        clearInterval(timerInterval);
+        timerRunning=false;
+        btn.textContent='▶ شروع';
+        const mins = Math.max(1, Math.round(timerTotal/60));
+        await logStudySession(mins);
+        showToast('⏱ زمان مطالعه تمام شد — '+toFaDigits(mins)+' دقیقه ثبت شد ✓');
+        if('Notification' in window && Notification.permission==='granted'){
+          try{ new Notification('⏱ پلنر من', {body:'زمان تایمر مطالعه تمام شد.'}); }catch(e){}
+        }
+      }
+    },1000);
+  }
+}
+function timerReset(){
+  timerRunning=false;
+  clearInterval(timerInterval);
+  timerRemaining=timerTotal;
+  updateTimerDisplay();
+  const btn=document.getElementById('timerToggleBtn');
+  if(btn) btn.textContent='▶ شروع';
+}
+
+/* ---------- Book selects (shared by exams + grades) ---------- */
+function populateBookSelects(){
+  ['examBookSel','gradeBookSel'].forEach(id=>{
+    const sel=document.getElementById(id);
+    if(!sel || sel.dataset.built) return;
+    sel.dataset.built='1';
+    BOOKS.forEach(bk=>{
+      const o=document.createElement('option');
+      o.value=bk.id; o.textContent=`${bk.icon} ${bk.name}`;
+      sel.appendChild(o);
+    });
+  });
+  const dateInp=document.getElementById('examDateInp');
+  if(dateInp && !dateInp.value){
+    const g=new Date();
+    dateInp.value = `${g.getFullYear()}-${pad2(g.getMonth()+1)}-${pad2(g.getDate())}`;
+  }
+}
+
+/* ---------- Exams ---------- */
+async function loadExams(){ return (await sGet('exams')) || []; }
+async function saveExams(list){ await sSet('exams', list); }
+
+async function addExam(){
+  const bookId = document.getElementById('examBookSel').value;
+  const dateVal = document.getElementById('examDateInp').value;
+  const note = document.getElementById('examNoteInp').value.trim();
+  if(!dateVal){ showToast('تاریخ امتحان را انتخاب کن'); return; }
+  const list = await loadExams();
+  list.push({id:'e'+Date.now().toString(36), bookId, dateISO:dateVal, note});
+  await saveExams(list);
+  document.getElementById('examNoteInp').value='';
+  renderExams();
+  showToast('امتحان اضافه شد ✓');
+}
+async function deleteExam(id){
+  let list = await loadExams();
+  list = list.filter(x=>x.id!==id);
+  await saveExams(list);
+  renderExams();
+}
+function daysUntil(dateISO){
+  const target = new Date(dateISO+'T00:00:00');
+  const now = new Date();
+  const startToday = new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  return Math.round((target-startToday)/86400000);
+}
+async function renderExams(){
+  const list = await loadExams();
+  list.sort((a,b)=> a.dateISO.localeCompare(b.dateISO));
+  const listEl=document.getElementById('examList');
+  const soonCard=document.getElementById('examSoonCard');
+  const soonListEl=document.getElementById('examSoonList');
+  if(!listEl) return;
+  populateBookSelects();
+  listEl.innerHTML='';
+  if(list.length===0){
+    listEl.innerHTML = `<div class="rem-empty">امتحانی ثبت نشده.</div>`;
+  }
+  const soonItems=[];
+  list.forEach(ex=>{
+    const bk=BOOKS.find(b=>b.id===ex.bookId);
+    const dLeft = daysUntil(ex.dateISO);
+    const row=document.createElement('div');
+    row.className='exam-item'+(dLeft<=3?' soon':'');
+    let dLabel;
+    if(dLeft<0) dLabel='گذشت';
+    else if(dLeft===0) dLabel='امروز!';
+    else if(dLeft===1) dLabel='فردا';
+    else dLabel = `${toFaDigits(dLeft)} روز`;
+    const eparts = ex.dateISO.split('-').map(Number);
+    const ej = toJalali(eparts[0],eparts[1],eparts[2]);
+    const ejLabel = `${toFaDigits(ej.jd)} ${JMONTHS[ej.jm-1]}`;
+    row.innerHTML = `
+      <div class="exam-days">${dLabel}</div>
+      <div class="exam-body">
+        <div class="exam-book">${bk?bk.icon+' '+bk.name:'📝'}</div>
+        <div class="exam-meta">${ejLabel}${ex.note?' · '+escapeHtml(ex.note):''}</div>
+      </div>
+      <button class="item-del" onclick="deleteExam('${ex.id}')">🗑</button>
+    `;
+    listEl.appendChild(row);
+    if(dLeft>=0 && dLeft<=7) soonItems.push({bk,dLeft,dLabel});
+  });
+  if(soonCard){
+    if(soonItems.length===0){ soonCard.style.display='none'; }
+    else{
+      soonCard.style.display='block';
+      soonListEl.innerHTML='';
+      soonItems.forEach(it=>{
+        const b=document.createElement('div');
+        b.className='exam-soon-banner';
+        b.innerHTML = `<span>${it.bk?it.bk.icon:'📝'}</span><span>${it.bk?it.bk.name:'امتحان'} — ${it.dLabel==='امروز!'?'امروز':it.dLabel==='فردا'?'فردا':it.dLabel+' دیگر'}</span>`;
+        soonListEl.appendChild(b);
+      });
+    }
+  }
+}
+
+/* ---------- General to-dos ---------- */
+async function loadTodos(){ return (await sGet('todos')) || []; }
+async function saveTodos(list){ await sSet('todos', list); }
+
+async function addTodo(){
+  const inp=document.getElementById('todoTextInp');
+  const text=inp.value.trim();
+  if(!text) return;
+  const list = await loadTodos();
+  list.push({id:'t'+Date.now().toString(36), text, done:false});
+  await saveTodos(list);
+  inp.value='';
+  renderTodos();
+}
+async function toggleTodoDone(id,val){
+  const list = await loadTodos();
+  const item = list.find(x=>x.id===id);
+  if(item) item.done=val;
+  await saveTodos(list);
+  renderTodos();
+}
+async function deleteTodo(id){
+  let list = await loadTodos();
+  list = list.filter(x=>x.id!==id);
+  await saveTodos(list);
+  renderTodos();
+}
+async function renderTodos(){
+  const el=document.getElementById('todoList');
+  if(!el) return;
+  const list = await loadTodos();
+  list.sort((a,b)=> (a.done===b.done)?0:(a.done?1:-1));
+  el.innerHTML='';
+  if(list.length===0){ el.innerHTML=`<div class="rem-empty">کاری ثبت نشده.</div>`; return; }
+  list.forEach(t=>{
+    const row=document.createElement('div');
+    row.className='todo-item'+(t.done?' done':'');
+    row.innerHTML = `
+      <input type="checkbox" ${t.done?'checked':''} onchange="toggleTodoDone('${t.id}',this.checked)">
+      <div class="todo-text">${escapeHtml(t.text)}</div>
+      <button class="item-del" onclick="deleteTodo('${t.id}')">🗑</button>
+    `;
+    el.appendChild(row);
+  });
+}
+
+/* ---------- Grades ---------- */
+async function loadGrades(){ return (await sGet('grades')) || []; }
+async function saveGrades(list){ await sSet('grades', list); }
+
+async function addGrade(){
+  const bookId = document.getElementById('gradeBookSel').value;
+  const scoreInp = document.getElementById('gradeScoreInp');
+  const score = parseFloat(scoreInp.value);
+  if(isNaN(score) || score<0 || score>20){ showToast('نمره باید بین ۰ تا ۲۰ باشد'); return; }
+  const list = await loadGrades();
+  const g = new Date();
+  list.push({id:'g'+Date.now().toString(36), bookId, score, dateISO:`${g.getFullYear()}-${pad2(g.getMonth()+1)}-${pad2(g.getDate())}`});
+  await saveGrades(list);
+  scoreInp.value='';
+  renderGrades();
+  showToast('نمره ثبت شد ✓');
+}
+async function deleteGrade(id){
+  let list = await loadGrades();
+  list = list.filter(x=>x.id!==id);
+  await saveGrades(list);
+  renderGrades();
+}
+async function renderGrades(){
+  const el=document.getElementById('gradeList');
+  if(!el) return;
+  populateBookSelects();
+  const list = await loadGrades();
+  list.sort((a,b)=> b.dateISO.localeCompare(a.dateISO));
+  el.innerHTML='';
+  if(list.length===0){ el.innerHTML=`<div class="rem-empty">نمره‌ای ثبت نشده.</div>`; return; }
+  list.forEach(g=>{
+    const bk=BOOKS.find(b=>b.id===g.bookId);
+    const j = (()=>{ const parts=g.dateISO.split('-').map(Number); return toJalali(parts[0],parts[1],parts[2]); })();
+    const row=document.createElement('div');
+    row.className='grade-item'+(g.score<10?' low':'');
+    row.innerHTML = `
+      <div class="grade-score">${toFaDigits(g.score)}</div>
+      <div class="grade-body">
+        <div class="grade-book">${bk?bk.icon+' '+bk.name:'—'}</div>
+        <div class="grade-meta">${toFaDigits(j.jd)} ${JMONTHS[j.jm-1]} ${toFaDigits(j.jy)}</div>
+      </div>
+      <button class="item-del" onclick="deleteGrade('${g.id}')">🗑</button>
+    `;
+    el.appendChild(row);
+  });
+}
+
+/* ---------- Textbooks N9 official (chap.sch.ir) + curriculum Q&A ---------- */
+const TEXTBOOKS_N9 = [
+  {code:'901', name:'آموزش قرآن', url:'http://www.chap.sch.ir/books/14236', keys:['قرآن','قران']},
+  {code:'902', name:'پیام‌های آسمان', url:'http://www.chap.sch.ir/books/14237', keys:['پیام','دینی','آسمان']},
+  {code:'903', name:'فارسی', url:'http://www.chap.sch.ir/books/14238', keys:['فارسی','ادبیات']},
+  {code:'904', name:'نگارش', url:'http://www.chap.sch.ir/books/14239', keys:['نگارش','انشا']},
+  {code:'905', name:'ریاضی', url:'http://www.chap.sch.ir/books/14240', keys:['ریاضی','معادله','هندسه']},
+  {code:'906', name:'علوم تجربی', url:'http://www.chap.sch.ir/books/14241', keys:['علوم','فیزیک','شیمی','زیست','حرکت','نیرو']},
+  {code:'907', name:'مطالعات اجتماعی', url:'http://www.chap.sch.ir/books/14242', keys:['مطالعات','تاریخ','جغرافیا','مدنی']},
+  {code:'908', name:'فرهنگ و هنر', url:'http://www.chap.sch.ir/books/14243', keys:['هنر','فرهنگ']},
+  {code:'909', name:'عربی', url:'http://www.chap.sch.ir/books/14244', keys:['عربی']},
+  {code:'910', name:'انگلیسی', url:'http://www.chap.sch.ir/books/14245', keys:['انگلیسی','english','زبان']},
+  {code:'911', name:'کتاب کار انگلیسی', url:'http://www.chap.sch.ir/books/14246', keys:['workbook','کار انگلیسی']},
+  {code:'917', name:'کار و فناوری', url:'http://www.chap.sch.ir/books/14247', keys:['فناوری','کار و']},
+];
+
+function renderTextbookList(){
+  const el=document.getElementById('textbookList');
+  if(!el) return;
+  el.innerHTML='';
+  TEXTBOOKS_N9.forEach(tb=>{
+    const a=document.createElement('a');
+    a.className='textbook-item';
+    a.href=tb.url;
+    a.target='_blank';
+    a.rel='noopener';
+    a.innerHTML=`<span class="tb-code">${toFaDigits(tb.code)}</span><span class="tb-name">${tb.name}</span><span class="tb-dl">PDF رسمی</span>`;
+    el.appendChild(a);
+  });
+}
+
+function detectTextbook(q, subjectSel){
+  const text=(subjectSel||'')+' '+(q||'');
+  for(const tb of TEXTBOOKS_N9){
+    if(tb.keys.some(k=>text.indexOf(k)>=0)) return tb;
+  }
+  return null;
+}
+
+function askPreset(q){
+  const inp=document.getElementById('askInput');
+  if(inp){ inp.value=q; }
+  askOnline();
+}
+
+async function askOnline(){
+  const inp=document.getElementById('askInput');
+  const subjEl=document.getElementById('askSubjectSel');
+  const q=(inp&&inp.value||'').trim();
+  const subject=(subjEl&&subjEl.value)||'';
+  if(!q){ if(inp) inp.focus(); showToast('سؤال را بنویس'); return; }
+
+  const box=document.getElementById('askResult');
+  const loading=document.getElementById('askLoading');
+  const titleEl=document.getElementById('askTitle');
+  const bodyEl=document.getElementById('askBody');
+  const linksEl=document.getElementById('askLinks');
+  if(!box) return;
+  box.classList.add('open');
+  if(loading){ loading.style.display='block'; loading.textContent='در حال جست‌وجو طبق کتاب درسی نهم ۱۴۰۵–۱۴۰۶ و اتصال به گوگل…'; }
+  if(titleEl) titleEl.textContent='';
+  if(bodyEl) bodyEl.textContent='';
+  if(linksEl) linksEl.innerHTML='';
+
+  const tb = detectTextbook(q, subject);
+  const curriculumPrefix = subject
+    ? `کتاب درسی ${subject} پایه نهم متوسطه اول سال ۱۴۰۵ ۱۴۰۶`
+    : `کتاب درسی پایه نهم متوسطه اول نظام ایران ۱۴۰۵ ۱۴۰۶`;
+  const fullQuery = `${curriculumPrefix} ${q}`;
+  const gq = encodeURIComponent(fullQuery);
+  const googleUrl = `https://www.google.com/search?q=${gq}&hl=fa&lr=lang_fa`;
+  const googleBooks = `https://www.google.com/search?tbm=bks&q=${gq}&hl=fa`;
+  const googleImg = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(q+' کتاب درسی نهم')}&hl=fa`;
+  const chapHome = 'http://www.chap.sch.ir/category/%D8%AF%D9%88%D8%B1%D9%87/%D8%AF%D9%88%D8%B1%D9%87-%D8%A7%D9%88%D9%84-%D9%85%D8%AA%D9%88%D8%B3%D8%B7%D9%87-%D8%AC%D8%AF%DB%8C%D8%AF/%D9%BE%D8%A7%DB%8C%D9%87-%D9%86%D9%87%D9%85';
+
+  let wikiTitle='', wikiExtract='', wikiUrl='';
+  try{
+    const wikiQ = subject ? `${q} ${subject}` : q;
+    const searchUrl = `https://fa.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(wikiQ)}&utf8=1&format=json&origin=*`;
+    const sRes = await fetch(searchUrl);
+    const sData = await sRes.json();
+    const hits = (sData.query && sData.query.search) || [];
+    if(hits.length>0){
+      wikiTitle = hits[0].title;
+      const sumUrl = `https://fa.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiTitle)}`;
+      const sumRes = await fetch(sumUrl);
+      if(sumRes.ok){
+        const sum = await sumRes.json();
+        wikiExtract = sum.extract || '';
+        wikiUrl = (sum.content_urls && sum.content_urls.desktop && sum.content_urls.desktop.page) || `https://fa.wikipedia.org/wiki/${encodeURIComponent(wikiTitle)}`;
+        if(sum.title) wikiTitle = sum.title;
+      }
+    }
+  }catch(e){ console.warn('wiki fetch failed', e); }
+
+  if(loading) loading.style.display='none';
+
+  const note = `این پاسخ برای دانش‌آموز پایه نهم نظام ایران (سال تحصیلی ۱۴۰۵–۱۴۰۶) تنظیم شده. برای مطابقت کامل با متن کتاب، PDF رسمی همان درس را از بخش کتاب‌ها باز کن.`;
+  if(wikiExtract){
+    if(titleEl) titleEl.textContent = wikiTitle + (tb?` · مرتبط با ${tb.name}`:'');
+    if(bodyEl) bodyEl.innerHTML = `<p style="margin:0 0 10px">${escapeHtml(wikiExtract)}</p><p style="margin:0;font-size:12.5px;color:var(--ink-soft)">${escapeHtml(note)}</p>`;
+  } else {
+    if(titleEl) titleEl.textContent = 'خلاصه آماده نشد — از گوگل و PDF کتاب استفاده کن';
+    if(bodyEl) bodyEl.innerHTML = `<p style="margin:0">${escapeHtml(note)}</p><p style="margin:8px 0 0">عبارت جست‌وجوی گوگل: <b dir="auto">${escapeHtml(fullQuery)}</b></p>`;
+  }
+
+  if(linksEl){
+    linksEl.innerHTML = `
+      <a href="${googleUrl}" target="_blank" rel="noopener">🔎 گوگل (محدود به کتاب نهم ۱۴۰۵)</a>
+      <a href="${googleBooks}" target="_blank" rel="noopener">📚 کتاب‌های گوگل</a>
+      <a href="${googleImg}" target="_blank" rel="noopener">🖼 تصاویر</a>
+      ${tb ? `<a href="${tb.url}" target="_blank" rel="noopener">📥 PDF ${escapeHtml(tb.name)}</a>` : `<a href="${chapHome}" target="_blank" rel="noopener">📥 پایگاه کتاب‌های نهم</a>`}
+      ${wikiUrl ? `<a href="${wikiUrl}" target="_blank" rel="noopener">📖 دانشنامه</a>` : ''}
+    `;
+  }
+  showToast('آماده شد — گوگل و کتاب رسمی ✓');
+}
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='Enter' && document.activeElement && document.activeElement.id==='askInput'){
+    e.preventDefault();
+    askOnline();
+  }
+});
+
+/* ---------- AI Chat — فقط Grok (xAI) · منبع: کتاب درسی نهم ---------- */
+const AI_SYSTEM = `تو Grok هستی و نقش معلم رسمی پایه نهم متوسطه اول ایران (سال تحصیلی ۱۴۰۵–۱۴۰۶) را داری.
+
+منبع پاسخ:
+- فقط کتاب‌های درسی رسمی پایه نهم (ریاضی ۹۰۵، علوم تجربی ۹۰۶، فارسی ۹۰۳، نگارش ۹۰۴، عربی ۹۰۹، انگلیسی ۹۱۰، مطالعات اجتماعی ۹۰۷، پیام‌های آسمان ۹۰۲، قرآن ۹۰۱، فرهنگ و هنر ۹۰۸، کار و فناوری ۹۱۷).
+- پاسخ را طوری بنویس که انگار خط‌به‌خط از همان کتاب می‌آید: تعریف‌ها، مثال‌ها و واژگان کتاب.
+- اگر دقیق متن صفحه را نداری، صریحاً بگو «بر اساس محتوای معمول کتاب نهم» و در همان سطح توضیح بده؛ چیز خارج از کتاب اضافه نکن.
+
+قوانین:
+1) زبان: فارسی ساده و رسمی دانش‌آموز نهم.
+2) کوتاه، مرحله‌به‌مرحله، با مثال کتاب‌مانند.
+3) اگر موضوع بالاتر از نهم است فقط بگو و بخش مرتبط با نهم را بگو.
+4) برای تجربی و نمونه دولتی فقط بر اساس دروس نهم راهنمایی بده.
+5) سؤال نامرتبط را به درس برگردان.`;
+
+const AI_LS_KEY = 'planner-man:ai-settings';
+const AI_LS_CHAT = 'planner-man:ai-chat';
+const XAI_BASE = 'https://api.x.ai/v1';
+const XAI_MODEL = 'grok-3';
+
+function loadAiSettings(){
+  try{ return JSON.parse(localStorage.getItem(AI_LS_KEY)||'{}'); }catch(e){ return {}; }
+}
+function saveAiSettings(){
+  const key=(document.getElementById('aiApiKey')||{}).value||'';
+  localStorage.setItem(AI_LS_KEY, JSON.stringify({ key }));
+  showToast(key ? 'کلید Grok ذخیره شد ✓' : 'کلید پاک شد');
+}
+function fillAiSettingsForm(){
+  const s=loadAiSettings();
+  const k=document.getElementById('aiApiKey');
+  if(k && s.key) k.value=s.key;
+}
+
+function loadAiChat(){
+  try{ return JSON.parse(localStorage.getItem(AI_LS_CHAT)||'[]'); }catch(e){ return []; }
+}
+function saveAiChat(arr){
+  localStorage.setItem(AI_LS_CHAT, JSON.stringify(arr.slice(-40)));
+}
+
+function renderAiMessages(){
+  const el=document.getElementById('aiMessages');
+  if(!el) return;
+  const msgs=loadAiChat();
+  el.innerHTML='';
+  if(!msgs.length){
+    el.innerHTML='<div class="ai-bubble bot"><div class="ai-role">Grok · معلم نهم</div>سلام. سؤال را از روی کتاب نهم بپرس. اول کلید xAI را ذخیره کن (console.x.ai).</div>';
+    return;
+  }
+  msgs.forEach(m=>{
+    const d=document.createElement('div');
+    d.className='ai-bubble '+(m.role==='user'?'user':(m.err?'bot err':'bot'));
+    d.innerHTML=`<div class="ai-role">${m.role==='user'?'تو':'Grok · کتاب نهم'}</div>${escapeHtml(m.text)}`;
+    el.appendChild(d);
+  });
+  el.scrollTop=el.scrollHeight;
+}
+
+function clearAiChat(){
+  localStorage.removeItem(AI_LS_CHAT);
+  renderAiMessages();
+  showToast('گفتگو پاک شد');
+}
+function aiQuick(q){
+  const inp=document.getElementById('aiInput');
+  if(inp){ inp.value=q; }
+  sendAiMessage();
+}
+
+async function sendAiMessage(){
+  const inp=document.getElementById('aiInput');
+  const btn=document.getElementById('aiSendBtn');
+  const text=(inp&&inp.value||'').trim();
+  if(!text){ if(inp) inp.focus(); return; }
+
+  const settings=loadAiSettings();
+  if(!settings.key){
+    showToast('کلید API گراک (xAI) را ذخیره کن');
+    return;
+  }
+
+  const msgs=loadAiChat();
+  msgs.push({role:'user', text});
+  saveAiChat(msgs);
+  if(inp) inp.value='';
+  renderAiMessages();
+  if(btn){ btn.disabled=true; btn.textContent='…'; }
+
+  try{
+    const reply = await callGrokApi(settings.key, msgs);
+    msgs.push({role:'assistant', text:reply});
+    saveAiChat(msgs);
+  }catch(err){
+    console.error(err);
+    let msg = err.message||String(err);
+    if(/Failed to fetch|NetworkError|CORS/i.test(msg)){
+      msg = 'اتصال به api.x.ai برقرار نشد (شبکه یا محدودیت مرورگر). کلید را چک کن و از HTTPS/GitHub Pages تست کن.';
+    }
+    msgs.push({role:'assistant', text:'خطا: '+msg, err:true});
+    saveAiChat(msgs);
+  }
+  renderAiMessages();
+  if(btn){ btn.disabled=false; btn.textContent='ارسال'; }
+}
+
+async function callGrokApi(key, msgs){
+  const history = msgs.filter(m=>!m.err).slice(-12);
+  const oaiMessages = [{role:'system', content:AI_SYSTEM}].concat(
+    history.map(m=>({ role: m.role==='user'?'user':'assistant', content:m.text }))
+  );
+  const res = await fetch(XAI_BASE+'/chat/completions', {
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'Authorization':'Bearer '+key
+    },
+    body:JSON.stringify({
+      model: XAI_MODEL,
+      messages: oaiMessages,
+      temperature: 0.3,
+      max_tokens: 1200
+    })
+  });
+  let data;
+  try{ data = await res.json(); }catch(e){ throw new Error('پاسخ نامعتبر از xAI'); }
+  if(!res.ok){
+    const msg = (data.error && (data.error.message||data.error)) || res.status+' '+res.statusText;
+    throw new Error(typeof msg==='string'?msg:JSON.stringify(msg));
+  }
+  const t = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+  if(!t) throw new Error('پاسخ خالی از Grok');
+  return t.trim();
+}
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='Enter' && !e.shiftKey && document.activeElement && document.activeElement.id==='aiInput'){
+    e.preventDefault();
+    sendAiMessage();
+  }
+});
+
+/* Hook new features into the main init flow */
+const _origInit = init;
+init = async function(){
+  await _origInit();
+  populateBookSelects();
+  renderTimerPresets();
+  await renderExams();
+  await renderGoalCard();
+  await renderGoalForm();
+  await renderMilestones();
+  renderPriorityGuide();
+  renderTextbookList();
+  fillAiSettingsForm();
+  // seed default weekly schedule for تجربی if empty
+  await seedExperimentalSchedule();
+};
+
+async function seedExperimentalSchedule(){
+  const existing = await sGet('weeklySchedule');
+  if(existing && Object.keys(existing).length>0) return;
+  // شنبه تا چهارشنبه: دروس کلیدی تجربی پخش‌شده
+  const seed = {
+    0:['riazi','elm','farsi'],           // شنبه
+    1:['elm','english','arabi'],          // یکشنبه
+    2:['riazi','farsi','negaresh'],       // دوشنبه
+    3:['elm','riazi','motaleat'],         // سه‌شنبه
+    4:['farsi','english','dini','quran'], // چهارشنبه
+    5:[], 6:[]
+  };
+  schedule = seed;
+  await sSet('weeklySchedule', seed);
+  renderDayTabs();
+  renderBookPick();
+}
+</script>
+</body>
+</html>
